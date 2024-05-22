@@ -1,9 +1,11 @@
 'use client';
 
-import { AppShell, Burger, Group, Skeleton } from '@mantine/core';
+import { AppShell, Burger, Group } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { ReactNode } from 'react';
 import { Logo } from '@/components';
+import { Navbar } from '@/layout/Main/Navbar';
+import { Header } from '@/layout/Main/Header';
 
 type Props = { children: ReactNode };
 
@@ -22,18 +24,10 @@ export function MainLayout(props: Props) {
       padding="md"
     >
       <AppShell.Header>
-        <Group h="100%" px="md">
-          <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-          <Logo />
-        </Group>
+        <Header opened={opened} toggle={toggle} />
       </AppShell.Header>
-      <AppShell.Navbar p="md">
-        Navbar
-        {Array(15)
-          .fill(0)
-          .map((_, index) => (
-            <Skeleton key={index} h={28} mt="sm" animate={false} />
-          ))}
+      <AppShell.Navbar px="md" pt="md">
+        <Navbar />
       </AppShell.Navbar>
       <AppShell.Main>{children}</AppShell.Main>
     </AppShell>

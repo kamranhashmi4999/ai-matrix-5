@@ -1,23 +1,28 @@
 import { Button, Container, Group, Image, Text, Title } from '@mantine/core';
 import { IconArrowUpRight, IconBrain } from '@tabler/icons-react';
 import classes from './GuestHero.module.css';
+import Link from 'next/link';
 
 export function GuestHero() {
   return (
     <Container>
       <div className={classes.inner}>
         <div className={classes.content}>
-          <Group gap="xs" className={classes.highlight}>
+          <Group gap="xs" mb="lg" className={classes.highlight}>
             <IconBrain />
             <Text fw={500}>AI + Business</Text>
           </Group>
-          <Title className={classes.title}>Seamlessly AI Intergration for Business.</Title>
-          <Text c="dimmed" mt="md">
+          <Title mb="lg" className={classes.title}>
+            Seamlessly AI Intergration for Business.
+          </Title>
+          <Text c="dimmed" mb="lg">
             We will help integrate AI models into your application or business process.
           </Text>
 
           <Group mt={30}>
-            <Button size="md">Get started</Button>
+            <Button size="md" component={Link} href="/home">
+              Get started
+            </Button>
             <Button size="md" variant="light" rightSection={<IconArrowUpRight />}>
               Learn More
             </Button>

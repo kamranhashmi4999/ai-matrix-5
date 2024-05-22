@@ -1,1 +1,1 @@
-export * from './GuestHero.module.css';
+export * from './GuestHero';
