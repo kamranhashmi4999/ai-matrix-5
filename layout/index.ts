@@ -1,1 +1,2 @@
-export * from './main';
+export * from './Main';
+export * from './Guest';

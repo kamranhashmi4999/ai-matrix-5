@@ -3,6 +3,7 @@
 import { AppShell, Burger, Group, Skeleton } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { ReactNode } from 'react';
+import { Logo } from '@/components';
 
 type Props = { children: ReactNode };
 
@@ -23,7 +24,7 @@ export function MainLayout(props: Props) {
       <AppShell.Header>
         <Group h="100%" px="md">
           <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-          <p>Logo</p>
+          <Logo />
         </Group>
       </AppShell.Header>
       <AppShell.Navbar p="md">
