@@ -1,32 +1,37 @@
-import { AppShell, Burger } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
+'use client';
 
-function Demo() {
-    const [opened, { toggle }] = useDisclosure();
+import { ColorSchemeScript, MantineProvider } from '@mantine/core';
+import { ModalsProvider } from '@mantine/modals';
+import { Notifications } from '@mantine/notifications';
+import { Open_Sans } from 'next/font/google';
+import { theme } from '@/theme';
 
-    return (
-        <AppShell
-            header={{ height: 60 }}
-            navbar={{
-                width: 300,
-                breakpoint: 'sm',
-                collapsed: { mobile: !opened },
-            }}
-            padding="md"
-        >
-            <AppShell.Header>
-                <Burger
-                    opened={opened}
-                    onClick={toggle}
-                    hiddenFrom="sm"
-                    size="sm"
-                />
-                <div>Logo</div>
-            </AppShell.Header>
+import '@mantine/core/styles.css';
+import '@mantine/dates/styles.css';
+import '@mantine/tiptap/styles.css';
+import '@mantine/carousel/styles.css';
+import '@mantine/notifications/styles.css';
 
-            <AppShell.Navbar p="md">Navbar</AppShell.Navbar>
+import './globals.css';
 
-            <AppShell.Main>Main</AppShell.Main>
-        </AppShell>
-    );
+// If loading a variable font, you don't need to specify the font weight
+const openSans = Open_Sans({
+  subsets: ['latin'],
+  display: 'swap',
+});
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en" className={openSans.className}>
+      <head>
+        <title>AI Matrix</title>
+        <ColorSchemeScript defaultColorScheme="auto" />
+      </head>
+      <body>
+        <MantineProvider theme={theme} defaultColorScheme="light">
+          <Notifications position="bottom-right" zIndex={1000} />
+          <ModalsProvider>{children}</ModalsProvider>
+        </MantineProvider>
+      </body>
+    </html>
+  );
 }
