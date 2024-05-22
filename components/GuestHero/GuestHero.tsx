@@ -1,7 +1,7 @@
 import { Button, Container, Group, Image, Text, Title } from '@mantine/core';
 import { IconArrowUpRight, IconBrain } from '@tabler/icons-react';
-import classes from './GuestHero.module.css';
 import Link from 'next/link';
+import classes from './GuestHero.module.css';
 
 export function GuestHero() {
   return (
