@@ -29,7 +29,7 @@ const navItems = [
     icon: IconGauge,
     initiallyOpened: true,
     links: [
-      { label: 'AI Chat', link: '/' },
+      { label: 'AI Chat', link: '/chat' },
       { label: 'Custom Bots', link: '/' },
       { label: 'Bot Builder', link: '/' },
     ],
@@ -172,32 +172,32 @@ export function Navbar() {
   const links = navItems.map((item) => <LinksGroup {...item} key={item.label} />);
 
   return (
-      <>
-        <Box hiddenFrom="xs" className={classes.header}>
-          <Group justify="space-between">
-            <Logo />
-          </Group>
-        </Box>
+    <>
+      <Box hiddenFrom="xs" className={classes.header}>
+        <Group justify="space-between">
+          <Logo />
+        </Group>
+      </Box>
 
-        <div style={{ width: '100%', maxWidth: '250px' }}>
-          <TextInput
-              placeholder="Search"
-              size="xs"
-              leftSection={<IconSearch style={{ width: '10rem', height: '12rem' }} stroke={1.5} />} // Correct usage of CSS in JS
-              rightSectionWidth={70}
-              rightSection={<Code className={classes.searchCode}>Ctrl + K</Code>}
-              styles={{ section: { pointerEvents: 'none' } }}
-              mb="sm"
-          />
-        </div>
+      <div style={{ width: '100%', maxWidth: '250px' }}>
+        <TextInput
+          placeholder="Search"
+          size="xs"
+          leftSection={<IconSearch style={{ width: '10rem', height: '12rem' }} stroke={1.5} />} // Correct usage of CSS in JS
+          rightSectionWidth={70}
+          rightSection={<Code className={classes.searchCode}>Ctrl + K</Code>}
+          styles={{ section: { pointerEvents: 'none' } }}
+          mb="sm"
+        />
+      </div>
 
-        <ScrollArea className={classes.links}>
-          <div className={classes.linksInner}>{links}</div>
-        </ScrollArea>
+      <ScrollArea className={classes.links}>
+        <div className={classes.linksInner}>{links}</div>
+      </ScrollArea>
 
-        <div className={classes.footer}>
-          <UserButton />
-        </div>
-      </>
+      <div className={classes.footer}>
+        <UserButton />
+      </div>
+    </>
   );
 }
