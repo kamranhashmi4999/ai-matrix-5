@@ -25,38 +25,6 @@ interface Settings {
     submitOnEnter: boolean;
 }
 
-export const sampleString = `This is a test message.
-{
-  "introduction": "Welcome to our form!",
-  "questions": [
-    {
-      "type": "multiple_choice",
-      "question": "What is your favorite color?",
-      "options": ["Red", "Green", "Blue"]
-    },
-    {
-      "type": "checkboxes",
-      "question": "Select all the programming languages you know:",
-      "options": ["Python", "JavaScript", "Java", "C++"]
-    },
-    {
-      "type": "range_selector",
-      "question": "Rate your experience with our service (1-5):",
-      "range": {
-        "min": 1,
-        "max": 5,
-        "value": 3
-      }
-    },
-    {
-      "type": "input",
-      "question": "Please enter your email address:"
-    }
-  ]
-}
-
-This is some additional text after the JSON object.`;
-
 function ChatForm() {
     const [message, setMessage] = useState<string>("");
     const [currentTitle, setCurrentTitle] = useState<string | null>("");
