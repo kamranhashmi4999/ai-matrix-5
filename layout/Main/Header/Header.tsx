@@ -1,7 +1,7 @@
 import React from 'react';
 import { ActionIcon, Burger, BurgerProps, Group, TextInput } from '@mantine/core';
-import { ColorSchemeToggle, Logo } from '@/components';
 import { IconBell, IconSearch } from '@tabler/icons-react';
+import { ColorSchemeToggle, Logo } from '@/components';
 
 type Props = {
   opened: BurgerProps['opened'];
@@ -19,7 +19,7 @@ export function Header(props: Props) {
       </Group>
       <Group>
         <TextInput
-          leftSection={<IconSearch size={16} />}
+          leftSection={<IconSearch size={14} />}
           placeholder="Search information, messages and resources"
           w={500}
         />
