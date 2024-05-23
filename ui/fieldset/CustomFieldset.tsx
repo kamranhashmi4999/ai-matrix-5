@@ -1,5 +1,5 @@
 import { Fieldset, Button, Group, SimpleGrid } from '@mantine/core';
-import { ReactNode, Children } from 'react';
+import { ReactNode, Children, cloneElement } from 'react';
 
 interface CustomFieldsetProps {
     children: ReactNode;
@@ -24,18 +24,20 @@ function CustomFieldset({
 
     const content = (
         <SimpleGrid cols={cols} spacing="md">
-            {Children.toArray(children).map((child, index) => (
-                <div key={index} style={{width: '100%'}}>{child}</div>
+            {Children.toArray(children).map((child: any, index) => (
+                <div key={index} style={{ width: child.props.width || '100%' }}>
+                    {cloneElement(child, { ...child.props })}
+                </div>
             ))}
         </SimpleGrid>
     );
 
     return (
-        <Fieldset legend={legend} radius="lg" style={{width: fieldsetWidth}}>
+        <Fieldset legend={legend} radius="lg" style={{ width: fieldsetWidth }}>
             {content}
             {showButton && (
                 <Group justify="flex-end" mt="lg">
-                    <Button style={{width: buttonWidth}}>{buttonLabel}</Button>
+                    <Button style={{ width: buttonWidth }}>{buttonLabel}</Button>
                 </Group>
             )}
         </Fieldset>

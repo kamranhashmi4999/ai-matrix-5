@@ -8,6 +8,8 @@ interface CustomCheckboxGroupProps {
         label: string;
         value: string;
         tooltip?: string;
+        checked?: boolean;
+        disabled?: boolean;
     }[];
     legend?: string;
     layout?: 'single' | 'double' | 'triple' | 'quad';
@@ -17,15 +19,16 @@ interface CustomCheckboxGroupProps {
     fieldsetWidth?: string;
 }
 
-function CustomCheckboxGroup({
-                                 checkboxes,
-                                 legend,
-                                 layout = 'single',
-                                 buttonLabel,
-                                 showButton = true,
-                                 buttonWidth,
-                                 fieldsetWidth = '100%'
-                             }: CustomCheckboxGroupProps) {
+function CustomCheckboxGroup(
+    {
+        checkboxes,
+        legend,
+        layout = 'single',
+        buttonLabel,
+        showButton = true,
+        buttonWidth,
+        fieldsetWidth = '100%'
+    }: CustomCheckboxGroupProps) {
     const renderCheckboxes = (): ReactNode => {
         return checkboxes.map((checkbox, index) => (
             <CustomCheckbox
@@ -34,6 +37,8 @@ function CustomCheckboxGroup({
                 value={checkbox.value}
                 tooltip={checkbox.tooltip}
                 pointerCursor={true}
+                checked={checkbox.checked}
+                disabled={checkbox.disabled}
             />
         ));
     };
