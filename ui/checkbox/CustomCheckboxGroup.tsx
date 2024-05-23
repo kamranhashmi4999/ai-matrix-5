@@ -10,7 +10,7 @@ interface CustomCheckboxGroupProps {
         tooltip?: string;
     }[];
     legend?: string;
-    layout?: 'single' | 'double' | 'triple';
+    layout?: 'single' | 'double' | 'triple' | 'quad';
     buttonLabel?: string;
     showButton?: boolean;
     buttonWidth?: string;
