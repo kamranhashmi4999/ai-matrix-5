@@ -1,7 +1,8 @@
 import React from 'react';
-import CustomFieldset from '../../../../../ui/fieldset/CustomFieldset';
-import TagsInput from '../../../../../ui/pills/TagsInput';
-import CustomCheckboxGroup from '../../../../../ui/checkbox/CustomCheckboxGroup';
+import AmeFieldset from '@/ui/fieldset/AmeFieldset';
+import TagsInput from '@/ui/pills/TagsInput';
+import AmeSearchablePill from "@/ui/pills/AmeSearchablePill";
+import CustomCheckboxGroup from '@/ui/checkbox/CustomCheckboxGroup';
 import { TextInput, Space, Textarea, Checkbox, Group } from '@mantine/core';
 
 
@@ -16,7 +17,7 @@ const AppOverview = () => {
                 gap: '10px'
             }}>
 
-                <CustomFieldset legend="App Basics" layout="single" buttonLabel="Save" showButton={false}>
+                <AmeFieldset legend="App Basics" layout="single" buttonLabel="Save" showButton={false}>
                     <TextInput label="Name" placeholder="My New App" withAsterisk/>
                     <Textarea
                         label="App Description"
@@ -24,16 +25,21 @@ const AppOverview = () => {
                         resize="vertical"
                     />
 
-                    <TagsInput initialTags={[]} onTagsChange={(tags) => console.log(tags)}/>
+                    <AmeSearchablePill
+                        items="recipeCategories"
+                        label="Primary Categories"
+                        placeholder="Type to search common categories."
+                    />
 
-                </CustomFieldset>
+                    <TagsInput initialTags={[]} onTagsChange={(tags) => console.log(tags)}/>
+                </AmeFieldset>
 
                 <CustomCheckboxGroup
                     legend="Access & Permissions"
                     layout="quad"
                     showButton={false}
                     checkboxes={[
-                        { label: 'Myself', value: 'myself', tooltip: 'Visible for you.' },
+                        { label: 'Me', value: 'me', tooltip: 'Visible for you.', checked: true, disabled: true},
                         { label: 'My Company', value: 'myCompany', tooltip: 'Visible to employees within your organization.' },
                         { label: 'My Connections', value: 'myConnections', tooltip: 'Visible by other Matrix users with whom you have connections.' },
                         { label: 'Matrix Market Free', value: 'matrixMarketFree', tooltip: 'Free for all users to use.' },
@@ -42,7 +48,6 @@ const AppOverview = () => {
                         { label: 'Agency Companies', value: 'agencyCompanies', tooltip: 'Available to all companies within my Agency.' },
                     ]}
                 />
-
             </div>
         </div>
     );

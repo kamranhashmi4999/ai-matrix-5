@@ -4,14 +4,16 @@ import { Checkbox, CheckboxProps, MantineProvider, createTheme, Tooltip } from '
 interface CustomCheckboxProps extends Omit<CheckboxProps, 'radius' | 'size'> {
     tooltip?: string;
     pointerCursor?: boolean;
+    checked?: boolean;
+    disabled?: boolean;
 }
 
 const pointerTheme = createTheme({
     cursorType: 'pointer',
 });
 
-function CustomCheckbox({ tooltip, pointerCursor, ...props }: CustomCheckboxProps) {
-    const fixedProps = { radius: "xs", size: "sm" };
+function CustomCheckbox({ tooltip, pointerCursor, checked, disabled, ...props }: CustomCheckboxProps) {
+    const fixedProps = { radius: "xs", size: "sm", checked, disabled };
     const allProps = { ...props, ...fixedProps };
     const checkboxElement = <Checkbox {...allProps} />;
     const checkboxWithTooltip = tooltip ? (

@@ -1,6 +1,6 @@
 // ui/checkbox/CustomCheckboxGroup.tsx
 import CustomCheckbox from './CustomCheckbox';
-import CustomFieldset from '../fieldset/CustomFieldset';
+import AmeFieldset from '../fieldset/AmeFieldset';
 import { ReactNode } from 'react';
 
 interface CustomCheckboxGroupProps {
@@ -8,6 +8,8 @@ interface CustomCheckboxGroupProps {
         label: string;
         value: string;
         tooltip?: string;
+        checked?: boolean;
+        disabled?: boolean;
     }[];
     legend?: string;
     layout?: 'single' | 'double' | 'triple' | 'quad';
@@ -17,15 +19,16 @@ interface CustomCheckboxGroupProps {
     fieldsetWidth?: string;
 }
 
-function CustomCheckboxGroup({
-                                 checkboxes,
-                                 legend,
-                                 layout = 'single',
-                                 buttonLabel,
-                                 showButton = true,
-                                 buttonWidth,
-                                 fieldsetWidth = '100%'
-                             }: CustomCheckboxGroupProps) {
+function CustomCheckboxGroup(
+    {
+        checkboxes,
+        legend,
+        layout = 'single',
+        buttonLabel,
+        showButton = true,
+        buttonWidth,
+        fieldsetWidth = '100%'
+    }: CustomCheckboxGroupProps) {
     const renderCheckboxes = (): ReactNode => {
         return checkboxes.map((checkbox, index) => (
             <CustomCheckbox
@@ -34,12 +37,14 @@ function CustomCheckboxGroup({
                 value={checkbox.value}
                 tooltip={checkbox.tooltip}
                 pointerCursor={true}
+                checked={checkbox.checked}
+                disabled={checkbox.disabled}
             />
         ));
     };
 
     return (
-        <CustomFieldset
+        <AmeFieldset
             legend={legend}
             layout={layout}
             buttonLabel={buttonLabel}
@@ -48,7 +53,7 @@ function CustomCheckboxGroup({
             fieldsetWidth={fieldsetWidth}
         >
             {renderCheckboxes()}
-        </CustomFieldset>
+        </AmeFieldset>
     );
 }
 

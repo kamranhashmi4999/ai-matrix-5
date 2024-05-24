@@ -30,13 +30,17 @@
     "@tiptap/extension-link": "latest",
     "@tiptap/react": "latest",
     "@tiptap/starter-kit": "latest",
-    "clsx": "latest",
+    "clsx": "^2.1.1",
     "dayjs": "latest",
     "embla-carousel-react": "latest",
+    "mantine-datatable": "^7.9.1",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "recharts": "latest"
+    "react-icons": "^5.2.1",
+    "react-split": "^2.0.14",
+    "recharts": "latest",
+    "socket.io-client": "^4.7.5"
   },
   "devDependencies": {
     "@babel/core": "latest",
