@@ -1,11 +1,10 @@
-import { Group, Highlight, UnstyledButton, useMantineTheme } from '@mantine/core';
-import { IconBrain } from '@tabler/icons-react';
+import {Group, Highlight, UnstyledButton} from '@mantine/core';
+import Image from "next/image"
 
-export function Logo() {
-  const theme = useMantineTheme();
+export function Logo(): JSX.Element {
   return (
-    <Group component={UnstyledButton}>
-      <IconBrain color={theme.colors.violet[6]} />
+    <Group gap="xs" component={UnstyledButton}>
+      <Image src="/logo-circle.png" alt="ai matrix logo" height={24} width={24} />
       <Highlight
         highlight="ai"
         fw={500}
