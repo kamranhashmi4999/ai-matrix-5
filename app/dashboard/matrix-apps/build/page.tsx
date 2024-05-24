@@ -3,7 +3,7 @@
 'use client';
 
 import React from 'react';
-import AppOverview from './steps/AppOverview'; // pages/build/steps/AppOverview.tsx
+import AppOverview from './steps/AppOverview';
 import AIModelDetails from './steps/AIModelDetails';
 import AIConversation from './steps/AIConversation';
 import BrokerManagement from './steps/BrokerManagement';

@@ -1,5 +1,9 @@
+import { Box } from "@mantine/core";
+
 function Page() {
-  return <>Home</>;
+  return <Box>
+      
+  </Box>;
 }
 
 export default Page;

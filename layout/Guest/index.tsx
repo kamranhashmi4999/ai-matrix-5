@@ -23,7 +23,7 @@ export function GuestLayout(props: Props) {
             <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
             <Logo />
           </Group>
-          <Group gap={2}>
+          <Group gap={2} visibleFrom="md">
             <Button variant="subtle">Features</Button>
             <Button variant="subtle">Testimonials</Button>
             <Button variant="subtle">Pricing</Button>

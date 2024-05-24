@@ -3,10 +3,14 @@
     justify-content: space-between;
     padding-top: calc(var(--mantine-spacing-xl) * 4);
     padding-bottom: calc(var(--mantine-spacing-xl) * 4);
+
+    @media (max-width: $ mantine-breakpoint-md) {
+        flex-direction: column;
+    }
 }
 
 .content {
-    max-width: 560px; /* Adjusted from rem(480px) */
+    max-width: 560px;
     margin-right: calc(var(--mantine-spacing-xl));
 
     @media (max-width: $ mantine-breakpoint-md) {
@@ -16,13 +20,13 @@
 }
 
 .title {
-    color: var(--mantine-color-dark-1); /* Adjusted from light-dark(var(--mantine-color-black), var(--mantine-color-white)) */
-    font-size: 44px; /* Adjusted from rem(48px) */
+    color: var(--mantine-color-dark-1);
+    font-size: 44px;
     line-height: 1.2;
     font-weight: 700;
 
     @media (max-width: $ mantine-breakpoint-xs) {
-        font-size: 28px; /* Adjusted from rem(28px) */
+        font-size: 28px;
     }
 }
 
