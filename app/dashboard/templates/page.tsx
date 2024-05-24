@@ -4,16 +4,6 @@
 
 import React from 'react';
 
-const cards = [
-    {
-        title: "Some Cool App",
-        description: "This is a really cool app that does something cool!",
-        imageUrl: "https://via.placeholder.com/150",
-        linkUrl: "https://mantine.dev/"
-    },
-
-];
-
 
 const SampleParentPage = () => {
     return (
