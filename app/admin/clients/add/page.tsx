@@ -10,7 +10,7 @@ const NewClientsPage = () => {
         <Title order={3} mb="md">
           Add a new client
         </Title>
-        <ClientsForm asView />
+        <ClientsForm showAgency />
       </Box>
     </>
   );
