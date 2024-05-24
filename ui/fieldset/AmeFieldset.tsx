@@ -1,7 +1,7 @@
 import { Fieldset, Button, Group, SimpleGrid } from '@mantine/core';
 import { ReactNode, Children, cloneElement } from 'react';
 
-interface CustomFieldsetProps {
+interface AmeFieldsetProps {
     children: ReactNode;
     buttonLabel?: string;
     legend?: string;
@@ -11,7 +11,7 @@ interface CustomFieldsetProps {
     fieldsetWidth?: string;
 }
 
-function CustomFieldset({
+function AmeFieldset({
                             children,
                             buttonLabel = "Submit",
                             legend = "Information",
@@ -19,7 +19,7 @@ function CustomFieldset({
                             showButton = true,
                             buttonWidth = 'auto',
                             fieldsetWidth = '100%'
-                        }: CustomFieldsetProps) {
+                        }: AmeFieldsetProps) {
     const cols = layout === 'double' ? 2 : layout === 'triple' ? 3 : layout === 'quad' ? 4 : 1;
 
     const content = (
@@ -44,4 +44,4 @@ function CustomFieldset({
     );
 }
 
-export default CustomFieldset;
+export default AmeFieldset;

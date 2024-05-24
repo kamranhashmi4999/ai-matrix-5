@@ -1,6 +1,6 @@
 // ui/checkbox/CustomCheckboxGroup.tsx
 import CustomCheckbox from './CustomCheckbox';
-import CustomFieldset from '../fieldset/CustomFieldset';
+import AmeFieldset from '../fieldset/AmeFieldset';
 import { ReactNode } from 'react';
 
 interface CustomCheckboxGroupProps {
@@ -44,7 +44,7 @@ function CustomCheckboxGroup(
     };
 
     return (
-        <CustomFieldset
+        <AmeFieldset
             legend={legend}
             layout={layout}
             buttonLabel={buttonLabel}
@@ -53,7 +53,7 @@ function CustomCheckboxGroup(
             fieldsetWidth={fieldsetWidth}
         >
             {renderCheckboxes()}
-        </CustomFieldset>
+        </AmeFieldset>
     );
 }
 

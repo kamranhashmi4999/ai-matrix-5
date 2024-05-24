@@ -1,5 +1,5 @@
 import React from 'react';
-import CustomFieldset from '@/ui/fieldset/CustomFieldset';
+import AmeFieldset from '@/ui/fieldset/AmeFieldset';
 import TagsInput from '@/ui/pills/TagsInput';
 import AmeSearchablePill from "@/ui/pills/AmeSearchablePill";
 import CustomCheckboxGroup from '@/ui/checkbox/CustomCheckboxGroup';
@@ -17,7 +17,7 @@ const AppOverview = () => {
                 gap: '10px'
             }}>
 
-                <CustomFieldset legend="App Basics" layout="single" buttonLabel="Save" showButton={false}>
+                <AmeFieldset legend="App Basics" layout="single" buttonLabel="Save" showButton={false}>
                     <TextInput label="Name" placeholder="My New App" withAsterisk/>
                     <Textarea
                         label="App Description"
@@ -32,7 +32,7 @@ const AppOverview = () => {
                     />
 
                     <TagsInput initialTags={[]} onTagsChange={(tags) => console.log(tags)}/>
-                </CustomFieldset>
+                </AmeFieldset>
 
                 <CustomCheckboxGroup
                     legend="Access & Permissions"

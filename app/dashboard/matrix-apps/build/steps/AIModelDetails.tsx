@@ -1,6 +1,6 @@
 // steps/AIModelDetails.tsx
 import React from 'react';
-import CustomFieldset from "@/ui/fieldset/CustomFieldset";
+import AmeFieldset from "@/ui/fieldset/AmeFieldset";
 import { Textarea, TextInput } from "@mantine/core";
 import TagsInput from "@/ui/pills/TagsInput";
 import CustomCheckboxGroup from "@/ui/checkbox/CustomCheckboxGroup";
@@ -30,7 +30,7 @@ const AIModelDetails = () => {
                 flexWrap: 'wrap',
                 gap: '10px'
             }}>
-                <CustomFieldset legend="AI Model" layout="triple" buttonLabel="Save" showButton={false}>
+                <AmeFieldset legend="AI Model" layout="triple" buttonLabel="Save" showButton={false}>
 
                     <AmeSelect
                         label="API Provider"
@@ -59,9 +59,9 @@ const AIModelDetails = () => {
                     >
                     </AmeSelect>
 
-                </CustomFieldset>
+                </AmeFieldset>
 
-                <CustomFieldset legend="Model Settings" layout="double" showButton={false}>
+                <AmeFieldset legend="Model Settings" layout="triple" showButton={false} >
                     <AmeSlider
                         name="Max Tokens"
                         tooltip="The maximum number of tokens to generate shared between the prompt and completion. The exact limit varies by model. (One token is roughly 4 characters for standard English text)"
@@ -98,8 +98,8 @@ const AIModelDetails = () => {
                         step={.01}
                     />
                     <div style={{
-                        paddingRight: '75px',
-                        paddingLeft: '75px',
+                        paddingRight: '5px',
+                        paddingLeft: '5px',
                         justifyContent: 'center'
                     }}>
                         <AmePillsInput
@@ -109,7 +109,7 @@ const AIModelDetails = () => {
                             onPillsChange={(pills: string[]) => console.log('Updated pills:', pills)}
                         />
                     </div>
-                </CustomFieldset>
+                </AmeFieldset>
 
 
             </div>
