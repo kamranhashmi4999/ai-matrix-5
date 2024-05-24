@@ -4,6 +4,7 @@ import { Box, Button, Flex, Group, TextInput, Title } from "@mantine/core";
 import { IconPlus, IconTableExport } from "@tabler/icons-react";
 import clients from "./clients.json";
 import { ClientsTable } from "@/components";
+import Link from "next/link";
 
 const ClientsPage = () => {
   return (
@@ -18,7 +19,13 @@ const ClientsPage = () => {
             <Button variant="default" leftSection={<IconTableExport />}>
               Export
             </Button>
-            <Button leftSection={<IconPlus />}>Add client</Button>
+            <Button
+              leftSection={<IconPlus />}
+              component={Link}
+              href="/agency/clients/add"
+            >
+              Add client
+            </Button>
           </Group>
         </Flex>
         <ClientsTable data={clients} />
