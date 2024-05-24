@@ -13,8 +13,8 @@ import ChatBSettings from "@/app/chat/ChatSettings";
 import ChatBotForm from "@/app/chat/ChatForm";
 import ChatBotSettings from "@/app/chat/ChatSettings";
 import { useChat } from "@/context/chatContext";
-import { IconCircle, IconUserCircle, IconSend } from "@tabler/icons-react";
-import { eRoleType, iChat } from "@/utils/types";
+import { IconSend, IconUserFilled, IconCirclesFilled } from "@tabler/icons-react";
+import { eRoleType, iChat, iMessage } from "@/utils/types";
 import { Container, Group, Paper, Text, Button, Flex, Stack, Space, Input } from '@mantine/core';
 
 
@@ -31,7 +31,7 @@ interface Settings {
 
 function ChatForm() {
     const [message, setMessage] = useState<string>("");
-    const [msgHistory, setMsgHistory] = useState<any[]>([]);
+    const [msgHistory, setMsgHistory] = useState<iMessage[]>([]);
     const [streamText, setStreamText] = useState<string>("");
     const scrollToLastItem = useRef<HTMLDivElement | null>(null);
     const lastMessageRef = useRef<HTMLLIElement>(null);
@@ -45,9 +45,14 @@ function ChatForm() {
         setChatHistory,
     } = useChat();
 
-    const sendMessageHandler = useSocketManager((response: string) => {
-        setStreamText((prev) => prev + " " + response);
-    });
+    const sendMessageHandler = useSocketManager(
+        (response: string) => {
+            setStreamText((prev) => prev + " " + response);
+
+
+        }
+    );
+
 
     const getChatHistory = () => {
         let data = "";
@@ -63,13 +68,14 @@ function ChatForm() {
         }
     }, [msgHistory.length, lastMessageRef])
 
-    const displayUserMessage = (msg: string, type: any) => {
-        const newMessage: any = {
+    const displayUserMessage = (msg: string, type: eRoleType) => {
+        const newMessage: iMessage = {
             role: type,
             content: msg,
         };
         setMsgHistory((prev) => [...prev, newMessage]);
     };
+
 
     const settings: Settings = {
         customOptions: false,
@@ -99,9 +105,12 @@ function ChatForm() {
         setErrorText("");
         displayUserMessage(message, eRoleType.USER);
         // sendMessage(settings);
+        sendMessageHandler(message);
+        // displayUserMessage(streamText, eRoleType.ASSISTANT);
+        setMsgHistory((prev) => [...prev, { role: eRoleType.ASSISTANT, content: streamText }]);
         setMessage("")
-        sendMessageHandler(streamText);
-        displayUserMessage(streamText, eRoleType.ASSISTANT);
+        setStreamText("");
+        console.log(msgHistory);
     };
 
     // useLayoutEffect(() => {
@@ -195,10 +204,10 @@ function ChatMessage({ chatMsg, idx, msgHistory, streamText }: any) {
         <Group>
             <Flex align="center">
                 {chatMsg.role === eRoleType.USER ? (
-                    <IconUserCircle size={22} style={{ marginRight: '8px' }} />
+                    <IconUserFilled size={22} style={{ marginRight: '8px' }} />
 
                 ) : (
-                    <IconCircle size={22} style={{ marginRight: '8px' }} />
+                    <IconCirclesFilled size={22} style={{ marginRight: '8px' }} />
                 )}
                 <Text>
                     {chatMsg.role === eRoleType.USER ? "You" : "AI Matrix"}
