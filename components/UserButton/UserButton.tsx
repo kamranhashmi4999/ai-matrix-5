@@ -1,8 +1,12 @@
-import { UnstyledButton, Group, Avatar, Text, rem } from '@mantine/core';
+import { UnstyledButton, Group, Avatar, Text, rem, UnstyledButtonProps } from '@mantine/core';
 import { IconChevronRight } from '@tabler/icons-react';
 import classes from './UserButton.module.css';
 
-export function UserButton() {
+interface UserButtonProps extends Partial<UnstyledButtonProps> {
+  collapsed?: boolean
+}
+
+export function UserButton({collapsed}: UserButtonProps) {
   return (
     <UnstyledButton className={classes.user}>
       <Group>
@@ -11,17 +15,21 @@ export function UserButton() {
           radius="xl"
         />
 
-        <div style={{ flex: 1 }}>
-          <Text size="sm" fw={500}>
-            John Doe
-          </Text>
+        {!collapsed &&
+            <>
+              <div style={{flex: 1}}>
+                <Text size="sm" fw={500}>
+                  John Doe
+                </Text>
 
-          <Text c="dimmed" size="xs">
-            johndoe@hotmail.com
-          </Text>
-        </div>
+                <Text c="dimmed" size="xs">
+                  johndoe@hotmail.com
+                </Text>
+              </div>
 
-        <IconChevronRight style={{ width: rem(14), height: rem(14) }} stroke={1.5} />
+              <IconChevronRight style={{width: rem(14), height: rem(14)}} stroke={1.5}/>
+            </>
+        }
       </Group>
     </UnstyledButton>
   );

@@ -1,27 +1,24 @@
-import { Group, Code, ScrollArea, rem, Box, TextInput } from '@mantine/core';
+import {Box, Group, ScrollArea, Stack} from '@mantine/core';
 import {
-  IconNotes,
-  IconCalendarStats,
-  IconGauge,
-  IconPresentationAnalytics,
-  IconFileAnalytics,
-  IconAdjustments,
-  IconLock,
-  IconSearch,
   IconAi,
-  IconTools,
-  IconLayersIntersect,
-  IconGrid3x3,
   IconAutomation,
-  IconGrid4x4,
+  IconCalendarStats,
   IconCurrency,
+  IconGauge,
+  IconGrid3x3,
+  IconGrid4x4,
+  IconLayersIntersect,
+  IconPresentationAnalytics,
   IconSettings,
   IconSettingsCog,
+  IconTools,
 } from '@tabler/icons-react';
-import { LinksGroup, Logo } from '@/components';
+import {LinksGroup, Logo} from '@/components';
+import {UserButton} from '@/components/UserButton';
 
 import classes from './Navbar.module.css';
-import { UserButton } from '@/components/UserButton';
+import {CollapseNavLinks} from "@/components/CollapseNavLinks";
+import AmeSearchInput from "@/ui/input/AmeSearchInput";
 
 const navItems = [
   {
@@ -117,7 +114,7 @@ const navItems = [
     label: 'Matrix Apps',
     icon: IconGrid4x4,
     links: [
-      { label: 'App Builder', link: 'dashboard/matrix-apps/build/' },
+      { label: 'App Builder', link: '/dashboard/matrix-apps/build/' },
       { label: 'App Tester', link: '/' },
       { label: 'App Components', link: '/' },
     ],
@@ -163,13 +160,22 @@ const navItems = [
   },
 ];
 
+interface NavbarProps {
+  desktopOpened?: boolean
+  tabletOpened?: boolean
+  mobileOpened?: boolean
+}
+
 // TODO: Kevin - I made changes to make the navbar smaller, but we need to control the break points now
 // Ideally, we should have the big one for the dashboard, but this smaller one for the inner pages.
 // Also, we should have it first get tighter (less space and smaller text maybe. (truncate long text)
 // Then, it should only show the icons and then it should go away.
 
-export function Navbar() {
-  const links = navItems.map((item) => <LinksGroup {...item} key={item.label} />);
+export function Navbar({tabletOpened, mobileOpened}: NavbarProps) {
+  const links = navItems.map((item) => {
+    return (tabletOpened && mobileOpened) ?
+        <CollapseNavLinks {...item} key={item.label}/> : <LinksGroup {...item} key={item.label}/>
+  });
 
   return (
     <>
@@ -179,24 +185,19 @@ export function Navbar() {
         </Group>
       </Box>
 
-      <div style={{ width: '100%', maxWidth: '250px' }}>
-        <TextInput
-          placeholder="Search"
-          size="xs"
-          leftSection={<IconSearch style={{ width: '10rem', height: '12rem' }} stroke={1.5} />} // Correct usage of CSS in JS
-          rightSectionWidth={70}
-          rightSection={<Code className={classes.searchCode}>Ctrl + K</Code>}
-          styles={{ section: { pointerEvents: 'none' } }}
-          mb="sm"
-        />
-      </div>
+      {!(tabletOpened && mobileOpened) &&
+            <div style={{width: '100%'}}>
+          <AmeSearchInput mb="sm"/>
+        </div>
+      }
 
       <ScrollArea className={classes.links}>
-        <div className={classes.linksInner}>{links}</div>
+        {(tabletOpened && mobileOpened) ? <Stack align="center">{links}</Stack> :
+              <div>{links}</div>}
       </ScrollArea>
 
       <div className={classes.footer}>
-        <UserButton />
+        <UserButton collapsed={tabletOpened && mobileOpened}/>
       </div>
     </>
   );
