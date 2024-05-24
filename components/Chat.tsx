@@ -9,10 +9,13 @@ import {
 } from "react";
 import { useSocketManager } from '@/lib/socket';
 import { redirect } from "next/navigation";
-import ChatBSettings from "@/app/(chat)/ChatSettings";
-import ChatBotForm from "@/app/(chat)/ChatForm";
-import ChatBotSettings from "@/app/(chat)/ChatSettings";
+import ChatBSettings from "@/app/chat/ChatSettings";
+import ChatBotForm from "@/app/chat/ChatForm";
+import ChatBotSettings from "@/app/chat/ChatSettings";
 import { useChat } from "@/context/chatContext";
+import { IconCircle, IconUserCircle, IconSend } from "@tabler/icons-react";
+import { eRoleType, iChat } from "@/utils/types";
+import { Container, Group, Paper, Text, Button, Flex, Stack, Space, Input } from '@mantine/core';
 
 
 interface Settings {
@@ -37,7 +40,14 @@ function ChatForm() {
     const [showFormSample, setShowFormSample] = useState<boolean>(false);
     const [formAnswers, setFormAnswers] = useState([]);
 
-    const sendMessageHandler = useSocketManager(response => setStreamText((prev) => prev + " " + response));
+    const {
+        chatHistory,
+        setChatHistory,
+    } = useChat();
+
+    const sendMessageHandler = useSocketManager((response: string) => {
+        setStreamText((prev) => prev + " " + response);
+    });
 
     const getChatHistory = () => {
         let data = "";
@@ -87,11 +97,11 @@ function ChatForm() {
         e.preventDefault();
         if (!message) return;
         setErrorText("");
-        // displayUserMessage(message, eRoleType.USER);
+        displayUserMessage(message, eRoleType.USER);
         // sendMessage(settings);
         setMessage("")
         sendMessageHandler(streamText);
-        // displayUserMessage(streamText, eRoleType.ASSISTANT);
+        displayUserMessage(streamText, eRoleType.ASSISTANT);
     };
 
     // useLayoutEffect(() => {
@@ -112,18 +122,10 @@ function ChatForm() {
     //     }
     // }, [user]);
 
-    // useEffect(() => {
-    //     if (chatHistory.length > currentChat) {
-    //         setMsgHistory(chatHistory[currentChat].msgArr);
-    //     }
-    //     setStreamText("");
-    // }, []);
 
-    // useEffect(() => {
-    //     if (chatHistory.length > currentChat) {
-    //         setMsgHistory(chatHistory[currentChat].msgArr);
-    //     }
-    // }, [chatHistory]);
+    useEffect(() => {
+        setMsgHistory(chatHistory[0].msgArr);
+    }, [chatHistory]);
 
     useEffect(() => {
         if (streamText === "" || !isResponseLoading) return;
@@ -134,120 +136,109 @@ function ChatForm() {
 
     useEffect(() => {
         // scrollToBottom();
-
         if (msgHistory.length === 0) return;
 
-        // if (chatHistory.length === 0) {
-        //     setChatHistory((prev) => [
-        //         ...prev,
-        //         {
-        //             title: "New Chat",
-        //             msgArr: msgHistory,
-        //         },
-        //     ]);
-        // } else {
-        //     let data: iChat[] = chatHistory;
+        if (chatHistory.length === 0) {
+            setChatHistory((prev) => [
+                ...prev,
+                {
+                    title: "New Chat",
+                    msgArr: msgHistory,
+                },
+            ]);
+        } else {
+            let data: iChat[] = chatHistory;
 
-        //     data[currentChat] = {
-        //         title: chatHistory[currentChat].title,
-        //         msgArr: msgHistory,
-        //     };
-
-        //     setChatHistory(data);
-        // }
+            data[0] = {
+                title: chatHistory[0].title,
+                msgArr: msgHistory,
+            };
+            setChatHistory(data);
+        }
     }, [msgHistory]);
-
-    // useEffect(() => {
-    //     if (chatHistory.length > currentChat) {
-    //         setMsgHistory(chatHistory[currentChat].msgArr);
-    //     }
-    // }, [currentChat]);
 
     // const toggleSidebar = useCallback((): void => {
     //     setIsShowSidebar((prev) => !prev);
     // }, []);
 
     return (
-        <div className="flex h-[90vh] w-full text-sm">
-            <main className="flex-1 flex flex-col">
-                <div className="flex flex-col items-center justify-center p-4 text-md">
-                    <h1>AI Matrix</h1>
-                    <h3>
-                        How can I help you today?
-                    </h3>
+        <Container style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+            <Paper style={{ flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '16px' }}>
+                <div style={{ textAlign: 'center' }}>
+                    <Text size="lg">AI Matrix</Text>
+                    <Text size="md">How can I help you today?</Text>
                 </div>
+                <Space my={16} />
+                <ul style={{ flexGrow: 1, overflowY: 'auto' }}>
+                    {msgHistory.map((chatMsg, idx) => (
+                        <ChatMessage key={idx} chatMsg={chatMsg} idx={idx} msgHistory={msgHistory} streamText={streamText} />
+                    ))}
+                </ul>
+            </Paper>
+            <Paper style={{ flexShrink: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '16px' }}>
+                <ChatFormInput
+                    message={message}
+                    setMessage={setMessage}
+                    submitHandler={submitHandler}
+                    isResponseLoading={isResponseLoading}
+                    errorText={errorText}
+                    style={{ width: '100%' }}
+                />
+                <ChatBotSettings settings={settings} setShowFormSample={setShowFormSample} showFormSample={showFormSample} />
+            </Paper>
+        </Container>
+    );
+}
 
+function ChatMessage({ chatMsg, idx, msgHistory, streamText }: any) {
+    return (
+        <Group>
+            <Flex align="center">
+                {chatMsg.role === eRoleType.USER ? (
+                    <IconUserCircle size={22} style={{ marginRight: '8px' }} />
 
-                {/* {isShowSidebar ? (
-                    // <MdOutlineArrowRight
-                    //     className="absolute top-1/2 left-0 transform -translate-x-full cursor-pointer"
-                    //     size={36}
-                    //     onClick={toggleSidebar}
-                    // />
                 ) : (
-                    // <MdOutlineArrowLeft
-                    //     className="absolute top-1/2 left-0 transform -translate-x-full cursor-pointer"
-                    //     size={36}
-                    //     onClick={toggleSidebar}
-                    // />
+                    <IconCircle size={22} style={{ marginRight: '8px' }} />
                 )}
- */}
-                <div
-                    ref={scrollToLastItem}
-                    className="w-full sm:w-3/4 md:2/3 mx-auto flex flex-col h-full overflow-y-auto max-w-[730px]"
-                >
-                    <ul className="space-y-4 p-4">
-                        {msgHistory.map((chatMsg, idx) => (
-                            <li key={idx} className={`relative flex gap-8 p-4 rounded group`} ref={idx === msgHistory.length - 1 ? lastMessageRef : null}>
-                                <div className="h-8 flex">
-                                    {/* {chatMsg.role === eRoleType.USER ? (
-                                        <MdPerson size={22} />
-                                    ) : (
-                                        <MdChat size={22} />
-                                    )} */}
-                                </div>
-                                <div>
-                                    {/* <p className="mb-2">
-                                        {chatMsg.role === eRoleType.USER ? "You" : "AI Matrix"}
-                                    </p>
-                                    <div>
-                                        {idx === msgHistory.length - 1 &&
-                                            chatMsg.role === eRoleType.ASSISTANT &&
-                                            streamText.length > 0 ? (
-                                            <MarkdownView index={idx} content={streamText} />
-                                        ) : (
-                                            <MarkdownView index={idx} content={chatMsg.content} />
-                                        )}
-                                    </div> */}
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
+                <Text>
+                    {chatMsg.role === eRoleType.USER ? "You" : "AI Matrix"}
+                </Text>
+            </Flex>
+            <Space my={16} />
 
-                <div className="mt-auto p-8 w-full sm:w-3/4 md:2/3 mx-auto max-w-[730px]">
-                    {errorText && <p className="text-red-500">{errorText}</p>}
-                    <form className="flex items-center relative" onSubmit={submitHandler}>
-                        <input
-                            type="text"
+            <Text>
+                {idx === msgHistory.length - 1 &&
+                    chatMsg.role === eRoleType.ASSISTANT &&
+                    streamText.length > 0 ? (
+                    streamText
+                ) : (
+                    chatMsg.content
+                )}
+            </Text>
+        </Group>
+    );
+}
+
+function ChatFormInput({ message, setMessage, submitHandler, isResponseLoading, errorText }: any) {
+    return (
+        <Container style={{ width: '100%' }}>
+            <Paper>
+                <form onSubmit={submitHandler}>
+                    <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+                        <Input
+                            style={{ flex: 1, marginRight: '8px' }}
                             placeholder="Send a message"
-                            className={`flex-1 ${!isResponseLoading ? "pl-10" : ""} px-4 py-3 rounded-lg outline-none dark:text-[#fafafa] dark:bg-[#ffffff0d]`}
-                            spellCheck="false"
                             value={isResponseLoading ? "Processing..." : message}
                             onChange={(e) => setMessage(e.target.value)}
                             readOnly={isResponseLoading}
                         />
-                        {!isResponseLoading && (
-                            <div className="flex items-center absolute right-2 p-2 space-x-3">
-                                <button type="submit">
-                                </button>
-                            </div>
-                        )}
-                    </form>
-                    <ChatBotSettings settings={settings} setShowFormSample={setShowFormSample} showFormSample={showFormSample} />
-                </div>
-            </main>
-        </div>
+                        <Button type="submit" radius="sm" style={{ height: '32px', borderRadius: '4px' }}>
+                            <IconSend size={16} />
+                        </Button>
+                    </div>
+                </form>
+            </Paper>
+        </Container>
     );
 }
 
