@@ -63,7 +63,7 @@ importers:
         specifier: latest
         version: 2.4.0(@tiptap/pm@2.4.0)
       clsx:
-        specifier: latest
+        specifier: ^2.1.1
         version: 2.1.1
       dayjs:
         specifier: latest
@@ -71,6 +71,9 @@ importers:
       embla-carousel-react:
         specifier: latest
         version: 8.1.3(react@18.3.1)
+      mantine-datatable:
+        specifier: ^7.9.1
+        version: 7.9.1(@mantine/core@7.9.2(@mantine/hooks@7.9.2(react@18.3.1))(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.9.2(react@18.3.1))(clsx@2.1.1)(react@18.3.1)
       next:
         specifier: latest
         version: 14.2.3(@babel/core@7.24.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3912,6 +3915,14 @@ packages:
   make-dir@3.1.0:
     resolution: {integrity: sha512-g3FeP20LNwhALb/6Cz6Dd4F2ngze0jz7tbzrD2wAV+o9FeNHe4rL+yK2md0J/fiSf1sa1ADhXqi5+oVwOM/eGw==}
     engines: {node: '>=8'}
+
+  mantine-datatable@7.9.1:
+    resolution: {integrity: sha512-CmsP0GzrLfYxGq7PW6+fGSr8NGheN/0rxSxMBghsJOdfsjzVOq6zycgOyOcpE9gCw5X01RvQoUs1RP+MH2Tj9A==}
+    peerDependencies:
+      '@mantine/core': '>=7.8'
+      '@mantine/hooks': '>=7.8'
+      clsx: '>=2'
+      react: '>=18.2'
 
   map-or-similar@1.5.0:
     resolution: {integrity: sha512-0aF7ZmVon1igznGI4VS30yugpduQW3y3GkcgGJOp7d8x8QrizhigUxjI/m2UojsXXto+jLAH3KSz+xOJTiORjg==}
@@ -10077,6 +10088,13 @@ snapshots:
   make-dir@3.1.0:
     dependencies:
       semver: 6.3.1
+
+  mantine-datatable@7.9.1(@mantine/core@7.9.2(@mantine/hooks@7.9.2(react@18.3.1))(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.9.2(react@18.3.1))(clsx@2.1.1)(react@18.3.1):
+    dependencies:
+      '@mantine/core': 7.9.2(@mantine/hooks@7.9.2(react@18.3.1))(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@mantine/hooks': 7.9.2(react@18.3.1)
+      clsx: 2.1.1
+      react: 18.3.1
 
   map-or-similar@1.5.0: {}
 

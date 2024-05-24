@@ -1,11 +1,22 @@
 'use client';
 
-import { AppShell, Burger, Group } from '@mantine/core';
+import { AppShell, Burger, Group, Anchor, Breadcrumbs } from '@mantine/core';
 import {useDisclosure, useMediaQuery} from '@mantine/hooks';
 import { ReactNode } from 'react';
 import { Logo } from '@/components';
 import { Navbar } from '@/layout/Main/Navbar';
-import { Header } from '@/layout/Main/Header';
+import { Header } from "@/layout/Main/Header";
+
+// sample breadcrumbs to help with navigation
+const items = [
+  { title: "Home", href: "#" },
+  { title: "Nav #1", href: "#" },
+  { title: "Nav #2", href: "#" },
+].map((item, index) => (
+  <Anchor href={item.href} key={index}>
+    {item.title}
+  </Anchor>
+));
 
 type Props = { children: ReactNode };
 
@@ -32,8 +43,10 @@ export function MainLayout(props: Props) {
           <AppShell.Navbar px="xs" pt="md">
               <Navbar desktopOpened={desktop_match} tabletOpened={tablet_match} mobileOpened={mobile_match} />
           </AppShell.Navbar>
-          <AppShell.Main>{children}</AppShell.Main>
+          <AppShell.Main>
+              <Breadcrumbs mb="sm">{items}</Breadcrumbs>
+              {children}
+          </AppShell.Main>
       </AppShell>
-
   );
 }

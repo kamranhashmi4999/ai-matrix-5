@@ -1,8 +1,8 @@
-import {ColorSchemeScript, MantineProvider} from '@mantine/core';
-import {ModalsProvider} from '@mantine/modals';
-import {Notifications} from '@mantine/notifications';
-import {Inter} from 'next/font/google';
-import {theme} from '@/theme';
+import { ColorSchemeScript, MantineProvider } from '@mantine/core';
+import { ModalsProvider } from '@mantine/modals';
+import { Notifications } from '@mantine/notifications';
+import { Inter } from 'next/font/google';
+import { theme } from '@/theme';
 
 import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
@@ -29,7 +29,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={inter.className}>
       <head>
         <title>AI Matrix</title>
-          <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
         <ColorSchemeScript defaultColorScheme="auto" />
       </head>
       <body>
