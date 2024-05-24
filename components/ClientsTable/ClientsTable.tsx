@@ -30,7 +30,7 @@ export function ClientsTable({ data }: ClientsTableProps) {
         { accessor: "country" },
         { accessor: "primary_contact" },
         {
-          accessor: null,
+          accessor: "",
           title: "Actions",
           render: () => (
             <Button variant="subtle" size="sm" leftSection={<IconEye />}>

@@ -2,10 +2,8 @@
 
 import { Box, Button, Flex, Group, TextInput, Title } from "@mantine/core";
 import { IconPlus, IconTableExport } from "@tabler/icons-react";
-import clients from "./clients.json";
-import { ClientsTable } from "@/components";
 
-const ClientsPage = () => {
+const NewClientsPage = () => {
   return (
     <>
       <Box>
@@ -21,10 +19,9 @@ const ClientsPage = () => {
             <Button leftSection={<IconPlus />}>Add client</Button>
           </Group>
         </Flex>
-        <ClientsTable data={clients} />
       </Box>
     </>
   );
 };
 
-export default ClientsPage;
+export default NewClientsPage;
