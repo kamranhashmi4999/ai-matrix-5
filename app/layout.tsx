@@ -1,30 +1,35 @@
-import { ColorSchemeScript, MantineProvider } from '@mantine/core';
-import { ModalsProvider } from '@mantine/modals';
-import { Notifications } from '@mantine/notifications';
-import { Inter } from 'next/font/google';
-import { theme } from '@/theme';
+import { ColorSchemeScript, MantineProvider } from "@mantine/core";
+import { ModalsProvider } from "@mantine/modals";
+import { Notifications } from "@mantine/notifications";
+import { Inter } from "next/font/google";
+import { theme } from "@/theme";
 
-import '@mantine/core/styles.css';
-import '@mantine/dates/styles.css';
-import '@mantine/tiptap/styles.css';
-import '@mantine/carousel/styles.css';
-import '@mantine/notifications/styles.css';
-
-import './globals.css';
+import "@mantine/core/styles.css";
+import "@mantine/dates/styles.css";
+import "@mantine/tiptap/styles.css";
+import "@mantine/carousel/styles.css";
+import "@mantine/notifications/styles.css";
+import "@mantine/core/styles.layer.css";
+import "mantine-datatable/styles.layer.css";
+import "./globals.css";
 
 export const metadata = {
-    title: 'AI Matrix | Next-Generation AI Automation Framework',
-    description: 'Bridging the gap between AI capabilities and real-world business.',
+  title: "AI Matrix | Next-Generation AI Automation Framework",
+  description:
+    "Bridging the gap between AI capabilities and real-world business.",
 };
 
 // If loading.tsx a variable font, you don't need to specify the font weight
 const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
+  subsets: ["latin"],
+  display: "swap",
 });
 
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" className={inter.className}>
       <head>
