@@ -171,7 +171,7 @@ function ChatForm() {
     // }, []);
 
     return (
-        <Container style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+        <Container style={{ display: 'flex', flexDirection: 'column', height: '85vh' }}>
             <Paper style={{ flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '16px' }}>
                 <div style={{ textAlign: 'center' }}>
                     <Text size="lg">AI Matrix</Text>
