@@ -5,3 +5,4 @@ export * from "./NavbarLinksGroup";
 export * from "./UserButton";
 export * from "./ClientsTable";
 export * from "./ClientsForm";
+export * from "./NotesCard";

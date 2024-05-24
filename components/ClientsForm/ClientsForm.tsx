@@ -18,7 +18,7 @@ interface ClientsFormProps extends Partial<PaperProps> {
   showAgency?: boolean;
 }
 
-function ClientsForm({
+export function ClientsForm({
   asView,
   selectedClient,
   showAgency,
@@ -163,5 +163,3 @@ function ClientsForm({
     </Paper>
   );
 }
-
-export default ClientsForm;

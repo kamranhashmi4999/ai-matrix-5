@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Title } from "@mantine/core";
-import ClientsForm from "@/components/ClientsForm/ClientsForm";
+import { ClientsForm } from "@/components";
 
 const NewClientsPage = () => {
   return (
