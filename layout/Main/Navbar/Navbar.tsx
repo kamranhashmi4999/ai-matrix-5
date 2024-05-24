@@ -178,27 +178,27 @@ export function Navbar({tabletOpened, mobileOpened}: NavbarProps) {
   });
 
   return (
-      <>
-        <Box hiddenFrom="xs" className={classes.header}>
-          <Group justify="space-between">
-            <Logo />
-          </Group>
-        </Box>
+    <>
+      <Box hiddenFrom="xs" className={classes.header}>
+        <Group justify="space-between">
+          <Logo />
+        </Group>
+      </Box>
 
-        {!(tabletOpened && mobileOpened) &&
+      {!(tabletOpened && mobileOpened) &&
             <div style={{width: '100%'}}>
-              <AmeSearchInput mb="sm"/>
+          <AmeSearchInput mb="sm"/>
         </div>
-        }
+      }
 
-        <ScrollArea className={classes.links}>
-          {(tabletOpened && mobileOpened) ? <Stack align="center">{links}</Stack> :
+      <ScrollArea className={classes.links}>
+        {(tabletOpened && mobileOpened) ? <Stack align="center">{links}</Stack> :
               <div>{links}</div>}
-        </ScrollArea>
+      </ScrollArea>
 
-        <div className={classes.footer}>
-          <UserButton collapsed={tabletOpened && mobileOpened}/>
-        </div>
-      </>
+      <div className={classes.footer}>
+        <UserButton collapsed={tabletOpened && mobileOpened}/>
+      </div>
+    </>
   );
 }
