@@ -6,3 +6,4 @@ export * from "./UserButton";
 export * from "./ClientsTable";
 export * from "./ClientsForm";
 export * from "./NotesCard";
+export * from "./CollapseNavLinks";
