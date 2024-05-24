@@ -29,7 +29,7 @@ const navItems = [
     icon: IconGauge,
     initiallyOpened: true,
     links: [
-      { label: 'AI Chat', link: '/' },
+      { label: 'AI Chat', link: '/chat' },
       { label: 'Custom Bots', link: '/' },
       { label: 'Bot Builder', link: '/' },
     ],
