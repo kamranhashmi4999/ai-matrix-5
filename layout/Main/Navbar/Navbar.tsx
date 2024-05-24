@@ -114,7 +114,7 @@ const navItems = [
     label: 'Matrix Apps',
     icon: IconGrid4x4,
     links: [
-      { label: 'App Builder', link: 'dashboard/matrix-apps/build/' },
+      { label: 'App Builder', link: '/dashboard/matrix-apps/build/' },
       { label: 'App Tester', link: '/' },
       { label: 'App Components', link: '/' },
     ],

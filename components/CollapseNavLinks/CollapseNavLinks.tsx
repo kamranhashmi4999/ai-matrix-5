@@ -1,4 +1,5 @@
 import {ActionIcon, Menu, rem} from "@mantine/core";
+import Link from "next/link";
 
 interface CollapseNavLinksProps {
     icon: React.FC<any>;
@@ -20,7 +21,8 @@ export function CollapseNavLinks(props: CollapseNavLinksProps) {
             </Menu.Target>
 
             <Menu.Dropdown>
-                {links?.map(link => <Menu.Item key={link.label}>{link.label}</Menu.Item>)}
+                {links?.map(link => <Menu.Item key={link.label} component={Link}
+                                               href={link.link}>{link.label}</Menu.Item>)}
             </Menu.Dropdown>
         </Menu> : <ActionIcon size="lg">
             <Icon style={{width: rem(24), height: rem(24)}}/>
