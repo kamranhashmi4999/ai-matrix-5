@@ -1,13 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import ResponseSection from "@/app/chat/response-display/ResponseSection";
-import ChatFormInput from "@/app/chat/ChatFormInput";
+import ResponseSection from "@/app/chat/response/ResponseSection";
+import ChatFormInput from "@/app/chat/input/ChatFormInput";
 import { useChat } from "@/context/chatContext";
 import { eRoleType, iMessage } from "@/utils/types";
 import { Container, Paper, Space } from '@mantine/core';
 import { useSocketManager } from '@/lib/socket';
-import ChatBotSettings, { SettingsProps } from "@/components/AiChat/ChatSettings";
+import ChatBotSettings, { SettingsProps } from "@/app/dashboard/intelligence/chat-app/components/settings/simpleChatSettings";
 
 const initialSettings: SettingsProps = {
     aiPreferencesMain: 'direct_chat',

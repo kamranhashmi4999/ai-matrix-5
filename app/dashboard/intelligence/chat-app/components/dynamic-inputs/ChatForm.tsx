@@ -1,9 +1,10 @@
-// app/components/AiChat/ResponseForm/AiResponseForm.tsx
+// chat-app/components/dynamic-inputs/ChatForm.tsx
+
 "use client"
 
 import { useState } from "react";
 import { Button, Group } from '@mantine/core';
-import { Form, useForm } from '@mantine/form';
+import { useForm } from '@mantine/form';
 import {
     SelectInput,
     CheckboxGroupInput,
@@ -34,10 +35,10 @@ type RespondData = {
 type AiResponseFormProps = {
     index: number;
     respondData: RespondData;
-    setFormAnswers: Function;
+    setFormAnswers: (answers: Question[]) => void;
 };
 
-const updateFormValues = (formValues: any, question: string, answer: any) => {
+const updateFormValues = (formValues: RespondData, question: string, answer: any) => {
     const questionIndex = formValues.questions.findIndex((q: Question) => q.question === question);
     const updatedQuestions = [...formValues.questions];
     if (questionIndex !== -1) {
@@ -52,19 +53,14 @@ const updateFormValues = (formValues: any, question: string, answer: any) => {
     };
 };
 
-const AiResponseForm = ({
-                            index,
-                            respondData,
-                            setFormAnswers
-                        }: AiResponseFormProps) => {
-    const [formValues, setFormValues] = useState<RespondData>(
-        {
-            ...respondData,
-            questions: respondData.questions.map(question => ({
-                ...question,
-                answer: ''
-            }))
-        });
+const AiResponseForm = ({ index, respondData, setFormAnswers }: AiResponseFormProps) => {
+    const [formValues, setFormValues] = useState<RespondData>({
+        ...respondData,
+        questions: respondData.questions.map(question => ({
+            ...question,
+            answer: ''
+        }))
+    });
     const form = useForm();
 
     const handleInputChange = (value: any, question: string) => {
@@ -78,7 +74,7 @@ const AiResponseForm = ({
     };
 
     return (
-        <Form onSubmit={submitForm} form={form}>
+        <form onSubmit={submitForm}>
             {formValues.questions.map((question: Question) => {
                 const InputComponent = {
                     'multiple_choice': SelectInput,
@@ -89,8 +85,7 @@ const AiResponseForm = ({
                     'input': TextInput,
                 }[question.type];
 
-                return InputComponent ? <InputComponent key={question.question} question={question}
-                                                        handleInputChange={handleInputChange}/> : null;
+                return InputComponent ? <InputComponent key={question.question} question={question} handleInputChange={handleInputChange} /> : null;
             })}
 
             {formValues.questions.length > 0 && (
@@ -98,7 +93,7 @@ const AiResponseForm = ({
                     <Button type="submit">Submit Answers</Button>
                 </Group>
             )}
-        </Form>
+        </form>
     );
 };
 

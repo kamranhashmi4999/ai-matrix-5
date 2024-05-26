@@ -1,26 +1,23 @@
-// ChatBotSettings.tsx
-"use client";
+// chat-app/components/settings/simpleChatSettings.tsx
+'use client';
+
+import React from 'react';
 import { Select } from '@mantine/core';
 import { aiPreferencesMainOptions, aiPreferencesSecondOptions } from '@/app/data/chatSettingsOptions';
-import AmeFieldset from "@/ui/fieldset/AmeFieldset";
-import AmeCheckbox from "@/ui/checkbox/AmeCheckbox";
+import AmeFieldset from '@/ui/fieldset/AmeFieldset';
+import AmeCheckbox from '@/ui/checkbox/AmeCheckbox';
+import { SettingsProps } from '../../types/settings';
+import { ChatSettings } from '../../types/chat';
 
-export interface SettingsProps {
-    aiPreferencesMain: string;
-    aiPreferencesSecond: string;
-    makeSmallTalk: boolean;
-    quickAnswer: boolean;
-    improveQuestions: boolean;
-    submitOnEnter: boolean;
-}
-
-export interface ChatBotSettingsProps {
-    settings: SettingsProps;
+export interface SimpleChatSettingsProps {
+    settings: ChatSettings;
     onChange: (field: keyof SettingsProps, value: boolean | string) => void;
     onSubmit: () => void;
-};
+}
 
-const ChatBotSettings: React.FC<ChatBotSettingsProps> = ({ settings, onChange, onSubmit }) => {
+const SimpleChatSettings: React.FC<SimpleChatSettingsProps> = ({ settings, onChange, onSubmit }) => {
+    const chatSettings = settings.chatSettings as SettingsProps;
+
     return (
         <AmeFieldset
             legend="Settings"
@@ -30,39 +27,38 @@ const ChatBotSettings: React.FC<ChatBotSettingsProps> = ({ settings, onChange, o
         >
             <AmeCheckbox
                 label="Submit on Enter"
-                checked={settings.submitOnEnter}
+                checked={chatSettings.submitOnEnter}
                 onChange={(e) => onChange('submitOnEnter', e.currentTarget.checked)}
             />
             <AmeCheckbox
                 label="Make Small Talk"
-                checked={settings.makeSmallTalk}
+                checked={chatSettings.makeSmallTalk}
                 onChange={(e) => onChange('makeSmallTalk', e.currentTarget.checked)}
             />
             <AmeCheckbox
                 label="Quick Answer"
-                checked={settings.quickAnswer}
+                checked={chatSettings.quickAnswer}
                 onChange={(e) => onChange('quickAnswer', e.currentTarget.checked)}
             />
             <AmeCheckbox
                 label="Improve Questions"
-                checked={settings.improveQuestions}
+                checked={chatSettings.improveQuestions}
                 onChange={(e) => onChange('improveQuestions', e.currentTarget.checked)}
             />
             <Select
                 label="AI Preferences"
                 data={aiPreferencesMainOptions}
-                value={settings.aiPreferencesMain}
-                onChange={(value) => onChange('aiPreferencesMain', value || "")}
+                value={chatSettings.aiPreferencesMain}
+                onChange={(value) => onChange('aiPreferencesMain', value || '')}
             />
             <Select
                 label="Secondary Preference"
                 data={aiPreferencesSecondOptions}
-                value={settings.aiPreferencesSecond}
-                onChange={(value) => onChange('aiPreferencesSecond', value || "")}
+                value={chatSettings.aiPreferencesSecond}
+                onChange={(value) => onChange('aiPreferencesSecond', value || '')}
             />
         </AmeFieldset>
     );
-}
+};
 
-
-export default ChatBotSettings;
+export default SimpleChatSettings;
