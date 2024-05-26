@@ -3,7 +3,7 @@
 import React, { useState, useContext } from 'react';
 import { ChatContext } from '../context/ChatContext';
 import { UserContext } from '../context/UserContext';
-import { emitEvent } from '../utils/socket'; // Ensure you import the socket utility functions
+import { emitEvent } from '../utils/socket'; // Assume this is correctly imported
 
 const ChatInput = () => {
     const [input, setInput] = useState('');
@@ -15,7 +15,7 @@ const ChatInput = () => {
     }
 
     const { chatData, updateChatData } = chatContext;
-    const { userInfo } = userContext;
+    const { userData } = userContext;  // Corrected from userInfo to userData
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => setInput(e.target.value);
 
@@ -25,14 +25,19 @@ const ChatInput = () => {
 
         const newPromptData = {
             role: 'user',
-            message: input
+            message: input,
+            formResponses: [],  // Add this to satisfy the PromptData type
+            customInputs: []    // Add this to satisfy the PromptData type
         };
 
         const chatRequest = {
-            ...chatData, // Spread existing data to maintain other properties
-            promptData: [...chatData.promptData, newPromptData], // Update prompt data with new message
-            userToken: userInfo.userToken, // Now correctly using userInfo.userToken
-            task: 'streaming_chat', // Define task or other dynamic data based on your application needs
+            ...chatData, // Spread existing data to maintain other properties (confirm this is the correct structure)
+            promptData: [...chatData.promptData, newPromptData], // Ensure this is really what it should be. promptData needs to have role, message, formResponses, and customInputs.
+            userToken: userData.userToken,
+
+
+            // Currently hard-coded for ease of use, but needs to be dynamically determined based on the chat type
+            task: 'streaming_chat',
         };
 
         // Send the message through the WebSocket

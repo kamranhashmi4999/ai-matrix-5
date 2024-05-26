@@ -6,18 +6,15 @@ import { Select } from '@mantine/core';
 import { aiPreferencesMainOptions, aiPreferencesSecondOptions } from '@/app/data/chatSettingsOptions';
 import AmeFieldset from '@/ui/fieldset/AmeFieldset';
 import AmeCheckbox from '@/ui/checkbox/AmeCheckbox';
-import { SettingsProps } from '../../types/settings';
-import { ChatSettings } from '../../types/chat';
+import { ChatSettings } from '../../types/settings';
 
 export interface SimpleChatSettingsProps {
     settings: ChatSettings;
-    onChange: (field: keyof SettingsProps, value: boolean | string) => void;
+    onChange: (field: keyof ChatSettings, value: boolean | string) => void;
     onSubmit: () => void;
 }
 
 const SimpleChatSettings: React.FC<SimpleChatSettingsProps> = ({ settings, onChange, onSubmit }) => {
-    const chatSettings = settings.chatSettings as SettingsProps;
-
     return (
         <AmeFieldset
             legend="Settings"
@@ -27,34 +24,34 @@ const SimpleChatSettings: React.FC<SimpleChatSettingsProps> = ({ settings, onCha
         >
             <AmeCheckbox
                 label="Submit on Enter"
-                checked={chatSettings.submitOnEnter}
+                checked={settings.submitOnEnter}
                 onChange={(e) => onChange('submitOnEnter', e.currentTarget.checked)}
             />
             <AmeCheckbox
                 label="Make Small Talk"
-                checked={chatSettings.makeSmallTalk}
+                checked={settings.makeSmallTalk}
                 onChange={(e) => onChange('makeSmallTalk', e.currentTarget.checked)}
             />
             <AmeCheckbox
                 label="Quick Answer"
-                checked={chatSettings.quickAnswer}
+                checked={settings.quickAnswer}
                 onChange={(e) => onChange('quickAnswer', e.currentTarget.checked)}
             />
             <AmeCheckbox
                 label="Improve Questions"
-                checked={chatSettings.improveQuestions}
+                checked={settings.improveQuestions}
                 onChange={(e) => onChange('improveQuestions', e.currentTarget.checked)}
             />
             <Select
                 label="AI Preferences"
                 data={aiPreferencesMainOptions}
-                value={chatSettings.aiPreferencesMain}
+                value={settings.aiPreferencesMain}
                 onChange={(value) => onChange('aiPreferencesMain', value || '')}
             />
             <Select
                 label="Secondary Preference"
                 data={aiPreferencesSecondOptions}
-                value={chatSettings.aiPreferencesSecond}
+                value={settings.aiPreferencesSecond}
                 onChange={(value) => onChange('aiPreferencesSecond', value || '')}
             />
         </AmeFieldset>

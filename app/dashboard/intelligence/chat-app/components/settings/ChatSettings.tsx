@@ -2,22 +2,27 @@
 'use client';
 
 import React, { useContext } from 'react';
-import { SettingsContext } from '../../context/SettingsContext';
 import settingsComponents from './SettingsRegistry';
-import { SettingsProps } from '../../types/settings';
+import { SettingsContext } from '../../context/SettingsContext';
+import type { ChatSettings } from '../../types/settings';
 
 const ChatSettings = () => {
     const { settings, updateSettings } = useContext(SettingsContext);
-    const chatType = 'simpleChat'; // This should be dynamically determined based on the chat type
+
+
+    // This should be dynamically determined based on the chat type, but currently hard-coded for ease of use.
+    const chatType = 'simpleChat';
+
+
     const SettingsComponent = settingsComponents[chatType];
 
-    const handleChange = (field: keyof SettingsProps, value: boolean | string) => {
+    const handleChange = (field: keyof ChatSettings, value: boolean | string) => {
         const updatedChatSettings = { ...settings.chatSettings, [field]: value };
-        updateSettings({ ...settings, chatSettings: updatedChatSettings });
+        updateSettings({ chatSettings: updatedChatSettings });
     };
 
     const handleSubmit = () => {
-        // Handle submit logic if needed
+        // Logic needs to be added here to handle the submit action
     };
 
     if (!SettingsComponent) {
@@ -26,7 +31,7 @@ const ChatSettings = () => {
 
     return (
         <SettingsComponent
-            settings={settings}
+            settings={settings.chatSettings}
             onChange={handleChange}
             onSubmit={handleSubmit}
         />

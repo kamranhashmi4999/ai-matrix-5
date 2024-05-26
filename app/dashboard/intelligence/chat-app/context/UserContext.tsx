@@ -1,16 +1,16 @@
 // /chat-app/context/UserContext.tsx
 'use client';
-import React, { createContext, useState, ReactNode } from 'react';
+import React, { createContext, useState, ReactNode, useEffect } from 'react';
 
-interface UserInfo {
-    username: string;
+interface UserData {
+    userId: string;
     isAuthenticated: boolean;
-    userToken: string; // Adding userToken to the UserInfo interface
+    userToken: string;
 }
 
 interface UserContextType {
-    userInfo: UserInfo;
-    updateUserSettings: (info: UserInfo) => void;
+    userData: UserData;
+    updateUserData: (info: UserData) => void;
 }
 
 export const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -20,18 +20,31 @@ interface UserProviderProps {
 }
 
 export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
-    const [userInfo, setUserInfo] = useState<UserInfo>({
-        username: 'defaultUser',
+    const [userData, setUserData] = useState<UserData>({
+        userId: '',
         isAuthenticated: false,
-        userToken: 'defaultToken' // Provide a default or initial token if appropriate
+        userToken: ''
     });
 
-    const updateUserSettings = (info: UserInfo) => {
-        setUserInfo(info);
+    useEffect(() => {
+        const storedUserData = localStorage.getItem('userData');
+        if (storedUserData) {
+            const parsedUserData = JSON.parse(storedUserData);
+            setUserData({
+                userId: parsedUserData.userId,
+                isAuthenticated: parsedUserData.isAuthenticated,
+                userToken: parsedUserData.userToken
+            });
+        }
+    }, []);
+
+    const updateUserData = (info: UserData) => {
+        setUserData(info);
+        localStorage.setItem('userData', JSON.stringify(info));
     };
 
     return (
-        <UserContext.Provider value={{ userInfo, updateUserSettings }}>
+        <UserContext.Provider value={{ userData, updateUserData }}>
             {children}
         </UserContext.Provider>
     );

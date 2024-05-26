@@ -1,19 +1,19 @@
 // app/data/fake-data/utils/serverUtils.ts
 
-import { readFileSync } from 'fs';
+import { readFile } from 'fs/promises';
 import path from 'path';
 
-// Utility function to read the content of a file
-export const readFileContent = (fileName: string): string => {
-    const filePath = path.join(process.cwd(), fileName);
-    return readFileSync(filePath, 'utf-8');
+// Utility function to read the content of a file asynchronously
+export const readFileContent = async (fileName: string): Promise<string> => {
+    const filePath = path.join(process.cwd(), 'data/fake-data', fileName);  // Adjust the path as needed
+    return readFile(filePath, 'utf-8');
 };
 
-// Utility function to read multiple files and return their content
-export const readMultipleFiles = (fileNames: string[]): Record<string, string> => {
+// Asynchronous utility function to read multiple files and return their content
+export const readMultipleFiles = async (fileNames: string[]): Promise<Record<string, string>> => {
     const fileContents: Record<string, string> = {};
-    fileNames.forEach(fileName => {
-        fileContents[fileName] = readFileContent(fileName);
-    });
+    for (const fileName of fileNames) {
+        fileContents[fileName] = await readFileContent(fileName);
+    }
     return fileContents;
 };
