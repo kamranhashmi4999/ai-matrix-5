@@ -1,10 +1,11 @@
 // pages/api/read-files.ts
+'use server';
 
 import { NextRequest, NextResponse } from 'next/server';
 import corsMiddleware from '@/middleware/corsMiddleware';
-import { readMultipleFiles } from '@/app/data/fake-data/utils/serverUtils';
 
 async function handler(req: NextRequest) {
+    const { readMultipleFiles } = await import('@/app/data/fake-data/utils/serverUtils');
     console.log('Incoming request:', req.method);
     if (req.method === 'POST') {
         const { fileNames } = await req.json();

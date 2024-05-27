@@ -7,21 +7,18 @@ import {
     useEffect
 } from "react";
 // import axios from 'axios';
-import fakeChatHistory from '../app/data/fake-data/fake-chat-history/fake-chat-history';
+import loadChatHistory from '../app/data/fake-data/fake-chat-history/fake-chat-history';
 
 const ChatContext = createContext<{
     chatHistory: iChat[];
-    setChatHistory: React.Dispatch<
-        React.SetStateAction<iChat[]>
-    >;
+    setChatHistory: React.Dispatch<React.SetStateAction<iChat[]>>;
 }>({
     chatHistory: [],
     setChatHistory: () => {}
 });
 
 export const ChatProvider = ({ children }: { children: ReactNode }) => {
-    // Use fake data as initial state for development or testing
-    const [chatHistory, setChatHistory] = useState<iChat[]>(fakeChatHistory);
+    const [chatHistory, setChatHistory] = useState<iChat[]>([]);
 
     // Uncomment below to switch to real API data fetching
     /*

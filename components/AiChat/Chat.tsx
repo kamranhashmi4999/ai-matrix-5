@@ -7,7 +7,23 @@ import { useChat } from "@/context/chatContext";
 import { eRoleType, iMessage } from "@/utils/types";
 import { Container, Paper, Space } from '@mantine/core';
 import { useSocketManager } from '@/lib/socket';
-import { ChatSettings, SettingsProps } from "@/types/settings";
+import ChatSettings from '@/app/dashboard/intelligence/chat-app/components/settings/ChatSettings';
+
+export interface SettingsProps {
+    aiPreferencesMain: string;
+    aiPreferencesSecond: string;
+    makeSmallTalk: boolean;
+    quickAnswer: boolean;
+    improveQuestions: boolean;
+    submitOnEnter: boolean;
+}
+
+export interface ChatBotSettingsProps {
+    settings: SettingsProps;
+    onChange: (field: keyof SettingsProps, value: boolean | string) => void;
+    onSubmit: () => void;
+}
+
 
 const initialSettings: SettingsProps = {
     aiPreferencesMain: 'direct_chat',
@@ -89,11 +105,6 @@ function ChatForm() {
 
                 <Space h="sm" />
 
-                <ChatBotSettings
-                    settings={settings}
-                    onChange={handleSettingsChange}
-                    onSubmit={() => {}}
-                />
 
             </Paper>
         </Container>
@@ -101,3 +112,26 @@ function ChatForm() {
 }
 
 export default ChatForm;
+
+/*
+    return (
+        <Container style={{ display: 'flex', flexDirection: 'column', height: '90vh' }}>
+            <ResponseSection msgHistory={msgHistory} streamText={streamText} />
+
+            <Paper shadow="xs" radius="xs" p="xl">
+                <ChatFormInput
+                    message={message}
+                    setMessage={setMessage}
+                    submitHandler={submitHandler}
+                    isResponseLoading={isResponseLoading}
+                    errorText={errorText}
+                />
+
+                <Space h="sm" />
+
+
+            </Paper>
+        </Container>
+    );
+}
+ */

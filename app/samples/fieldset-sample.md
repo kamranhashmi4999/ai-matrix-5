@@ -1,4 +1,11 @@
-"use client";
+was having issues with the build so I just deleted the folder:
+
+fieldset-sample
+- page.tsx:
+  "use client";
+- 
+'''tsx
+
 import { Select } from '@mantine/core';
 import { useState } from 'react';
 import { aiPreferencesMainOptions, aiPreferencesSecondOptions } from '@/app/data/chatSettingsOptions';
@@ -6,45 +13,37 @@ import AmeFieldset from "@/ui/fieldset/AmeFieldset";
 import AmeCheckbox from "@/ui/checkbox/AmeCheckbox";
 
 export interface SettingsProps {
-    aiPreferencesMain: string;
-    aiPreferencesSecond: string;
-    makeSmallTalk: boolean;
-    quickAnswer: boolean;
-    improveQuestions: boolean;
-    submitOnEnter: boolean;
+aiPreferencesMain: string;
+aiPreferencesSecond: string;
+makeSmallTalk: boolean;
+quickAnswer: boolean;
+improveQuestions: boolean;
+submitOnEnter: boolean;
 }
 
 const defaultSettings: SettingsProps = {
-    aiPreferencesMain: 'direct_chat',
-    aiPreferencesSecond: 'one_ai_chat',
-    makeSmallTalk: false,
-    quickAnswer: true,
-    improveQuestions: false,
-    submitOnEnter: true
+aiPreferencesMain: 'direct_chat',
+aiPreferencesSecond: 'one_ai_chat',
+makeSmallTalk: false,
+quickAnswer: true,
+improveQuestions: false,
+submitOnEnter: true
 };
 
 export interface ChatBotSettingsProps {
-    onSubmit: (settings: SettingsProps) => void;
-    onSettingsChange?: (settings: SettingsProps) => void;
+settings: SettingsProps;
+onChange: (field: keyof SettingsProps, value: boolean | string) => void;
+onSubmit: (settings: SettingsProps) => void;
+}
+
+const ChatBotSettings: React.FC<ChatBotSettingsProps> = ({ settings, onChange, onSubmit }) => {
+const handleCheckboxChange = (field: keyof SettingsProps) => (event: React.ChangeEvent<HTMLInputElement>) => {
+const newChecked = event.currentTarget.checked;
+onChange(field, newChecked);
 };
 
-const ChatBotSettings: React.FC<ChatBotSettingsProps> = ({ onSubmit, onSettingsChange }) => {
-    const [settings, setSettings] = useState<SettingsProps>(defaultSettings);
-
-    const updateSettings = (updatedSettings: SettingsProps) => {
-        setSettings(updatedSettings);
-        if (onSettingsChange) {
-            onSettingsChange(updatedSettings);
-        }
-    };
-
-    const handleCheckboxChange = (field: keyof SettingsProps) => (event: React.ChangeEvent<HTMLInputElement>) => {
-        const newChecked = event.currentTarget.checked;
-        updateSettings({ ...settings, [field]: newChecked });
-    };
-
     const handleSelectChange = (field: 'aiPreferencesMain' | 'aiPreferencesSecond', value: string | null) => {
-        updateSettings({ ...settings, [field]: value || "" });
+        onChange(field, value || "");
     };
 
     return (
@@ -91,3 +90,4 @@ const ChatBotSettings: React.FC<ChatBotSettingsProps> = ({ onSubmit, onSettingsC
 }
 
 export default ChatBotSettings;
+'''

@@ -28,6 +28,7 @@ export interface ChatRequest {
     activeChatId: string | null;
 }
 
+// Request Metadata Context
 export interface RequestMetadata {
     requestId: string;
     requestIndex: number;
@@ -36,6 +37,15 @@ export interface RequestMetadata {
     requestType: string;
     requestSource: string;
     requestChannel: string;
+}
+
+export interface RequestMetadataProviderProps {
+    children: React.ReactNode;
+}
+
+export interface RequestMetadataContextProps {
+    requestMetadata: RequestMetadata;
+    updateRequestMetadata: (metadata: Partial<RequestMetadata>) => void;
 }
 
 export interface PromptData {
@@ -72,8 +82,6 @@ export interface FormProviderProps {
     children: ReactNode;
 }
 
-
-
 // Chat Context Type
 export interface ChatContextProps {
     chatData: ChatRequest;
@@ -98,8 +106,6 @@ export interface ChatHistoryChat {
     message: string;
 }
 
-
-
 export interface ChatMessage {
     chatId: string | null;
     user: string;
@@ -118,10 +124,6 @@ export interface ChatContextType {
     updateSettings: (key: string, value: any) => void;
 }
 
-
-
-
-
 // Global Chat
 export interface GlobalChatData {
     eventName: string;
@@ -137,12 +139,6 @@ export interface GlobalChatContextProps {
 
 export interface GlobalChatProviderProps {
     children: ReactNode;
-}
-
-
-
-export interface RequestMetadataProviderProps {
-    children: React.ReactNode;
 }
 
 export interface ChatProviderProps {
@@ -167,4 +163,5 @@ export type Question = {
 export type RespondData = {
     questions: Question[];
 };
+
 
