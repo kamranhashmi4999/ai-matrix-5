@@ -1,23 +1,32 @@
-// chat-app/components/ChatHistory.tsx
+// app/dashboard/intelligence/chat-app/components/ChatHistory.tsx
+
 'use client';
 
-import React from 'react';
-import { useChat } from '../hooks/useChat';
+import React, { useEffect } from 'react';
+import { useHistory } from '../context/HistoryContext';
 
 const ChatHistory = () => {
-    const { chatHistory } = useChat();
+    const { chatHistory } = useHistory();
+
+    useEffect(() => {
+        if (!chatHistory) {
+            console.error('chatHistory is undefined or null');
+        } else {
+            console.log('chatHistory loaded:', chatHistory);
+        }
+    }, [chatHistory]);
+
+    if (!chatHistory || chatHistory.length === 0) {
+        return <div>No chat history available.</div>;
+    }
 
     return (
         <div className="chat-history">
-            {chatHistory.map((chat, chatIndex) => (
-                <div key={chat.chatId} className="chat-session">
-                    <h3>Chat ID: {chat.chatId}</h3>
-                    {chat.chatHistoryEntries.map((entry, index) => (
-                        <div key={index} className="chat-message">
-                            <p><strong>Role:</strong> {entry.role}</p>
-                            <p><strong>Message:</strong> {entry.message}</p>
-                        </div>
-                    ))}
+            <h3>Chat History</h3>
+            {chatHistory.map((entry, index) => (
+                <div key={index} className="chat-message">
+                    <p><strong>Role:</strong> {entry.role}</p>
+                    <p><strong>Message:</strong> {entry.message}</p>
                 </div>
             ))}
         </div>

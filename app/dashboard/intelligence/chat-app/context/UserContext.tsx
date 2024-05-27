@@ -27,14 +27,26 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     });
 
     useEffect(() => {
-        const storedUserData = localStorage.getItem('userData');
-        if (storedUserData) {
-            const parsedUserData = JSON.parse(storedUserData);
+        // Check for a hardcoded flag (e.g., in localStorage or an environment variable)
+        const hardcodedFlag = localStorage.getItem('useHardcodedUser');
+
+        if (hardcodedFlag === 'true') {
+            // Set hardcoded user data
             setUserData({
-                userId: parsedUserData.userId,
-                isAuthenticated: parsedUserData.isAuthenticated,
-                userToken: parsedUserData.userToken
+                userId: 'armaniuid',
+                isAuthenticated: true,
+                userToken: 'hardcodedUserToken'
             });
+        } else {
+            const storedUserData = localStorage.getItem('userData');
+            if (storedUserData) {
+                const parsedUserData = JSON.parse(storedUserData);
+                setUserData({
+                    userId: parsedUserData.userId,
+                    isAuthenticated: parsedUserData.isAuthenticated,
+                    userToken: parsedUserData.userToken
+                });
+            }
         }
     }, []);
 

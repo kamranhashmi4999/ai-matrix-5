@@ -6,8 +6,8 @@ import ChatSettings from './components/settings/ChatSettings';
 import ChatResponse from './components/ChatResponse';
 import ChatHistory from './components/ChatHistory';
 import AiResponseForm from './components/dynamic-inputs/ChatForm';
-import { AiResponseProvider, useAiResponse } from './context/AiResponseContext';
-import { ChatProvider } from './context/ChatContext';
+import { useAiResponse } from './context/AiResponseContext';
+import Layout from './layout';
 
 const PageContent: React.FC = () => {
     const { respondData, setRespondData } = useAiResponse();
@@ -37,11 +37,7 @@ const PageContent: React.FC = () => {
 
 const Page: React.FC = () => {
     return (
-        <AiResponseProvider>
-            <ChatProvider>
-                <PageContent />
-            </ChatProvider>
-        </AiResponseProvider>
+            <PageContent />
     );
 };
 

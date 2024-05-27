@@ -4,7 +4,7 @@
 import React, { useContext } from 'react';
 import settingsComponents from './SettingsRegistry';
 import { SettingsContext } from '../../context/SettingsContext';
-import type { ChatSettings } from '../../types/settings';
+import type { ChatSettings } from '../../../../../../types/settings';
 
 const ChatSettings = () => {
     const { settings, updateSettings } = useContext(SettingsContext);

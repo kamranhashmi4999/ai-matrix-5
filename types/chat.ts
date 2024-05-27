@@ -56,29 +56,49 @@ export interface FormResponse {
     response: string;
 }
 
+// Form
+export interface FormData {
+    promptData: PromptData[];
+    formResponses: FormResponse[];
+    customInputs: CustomInput[];
+}
 
-// Chat Context
+export interface FormContextProps {
+    formData: FormData;
+    updateFormData: (data: Partial<FormData>) => void;
+}
+
+export interface FormProviderProps {
+    children: ReactNode;
+}
+
+
+
+// Chat Context Type
 export interface ChatContextProps {
     chatData: ChatRequest;
-    chatHistory: ChatHistoryChat[];
     updateChatData: (newData: Partial<ChatRequest>) => void;
-    updateChatHistory: (newHistory: ChatHistoryChat[]) => void;
 }
 
 export interface ChatProviderProps {
     children: ReactNode;
 }
 
-// Chat History
-export interface ChatHistoryEntry {
+export interface HistoryContextProps {
+    chatHistory: ChatHistoryChat[];
+    updateChatHistory: (newHistory: ChatHistoryChat[]) => void;
+}
+
+export interface HistoryProviderProps {
+    children: ReactNode;
+}
+
+export interface ChatHistoryChat {
     role: string;
     message: string;
 }
 
-export interface ChatHistoryChat {
-    chatId: string;
-    chatHistoryEntries: ChatHistoryEntry[];
-}
+
 
 export interface ChatMessage {
     chatId: string | null;
@@ -101,22 +121,6 @@ export interface ChatContextType {
 
 
 
-
-// Form
-export interface FormData {
-    promptData: PromptData[];
-    formResponses: FormResponse[];
-    customInputs: CustomInput[];
-}
-
-export interface FormContextProps {
-    formData: FormData;
-    updateFormData: (data: Partial<FormData>) => void;
-}
-
-export interface FormProviderProps {
-    children: ReactNode;
-}
 
 // Global Chat
 export interface GlobalChatData {

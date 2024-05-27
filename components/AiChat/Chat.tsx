@@ -7,7 +7,7 @@ import { useChat } from "@/context/chatContext";
 import { eRoleType, iMessage } from "@/utils/types";
 import { Container, Paper, Space } from '@mantine/core';
 import { useSocketManager } from '@/lib/socket';
-import ChatBotSettings, { SettingsProps } from "@/app/dashboard/intelligence/chat-app/components/settings/simpleChatSettings";
+import { ChatSettings, SettingsProps } from "@/types/settings";
 
 const initialSettings: SettingsProps = {
     aiPreferencesMain: 'direct_chat',

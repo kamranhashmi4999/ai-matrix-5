@@ -5,7 +5,8 @@ import path from 'path';
 
 // Utility function to read the content of a file asynchronously
 export const readFileContent = async (fileName: string): Promise<string> => {
-    const filePath = path.join(process.cwd(), 'data/fake-data', fileName);  // Adjust the path as needed
+    const filePath = path.join(process.cwd(), 'app/data/fake-data/fake-chat-history', fileName);
+    console.log(`Reading file: ${filePath}`);
     return readFile(filePath, 'utf-8');
 };
 

@@ -1,18 +1,32 @@
 // pages/api/read-files.ts
 
-import type { NextApiRequest, NextApiResponse } from 'next';
-import { readMultipleFiles } from './serverUtils';
+import { NextRequest, NextResponse } from 'next/server';
+import corsMiddleware from '@/middleware/corsMiddleware';
+import { readMultipleFiles } from '@/app/data/fake-data/utils/serverUtils';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+async function handler(req: NextRequest) {
+    console.log('Incoming request:', req.method);
     if (req.method === 'POST') {
-        const { fileNames } = req.body;
+        const { fileNames } = await req.json();
         try {
             const fileContents = await readMultipleFiles(fileNames);
-            res.status(200).json(fileContents);
+            return NextResponse.json(fileContents);
         } catch (error) {
-            res.status(500).json({ error: 'Failed to read files' });
+            console.error('Error reading files:', error);
+            return NextResponse.json({ error: 'Failed to read files' }, { status: 500 });
         }
     } else {
-        res.status(405).json({ error: 'Method not allowed' });
+        return NextResponse.json({ error: 'Method not allowed' }, { status: 405 });
+    }
+}
+
+export default async function (req: NextRequest) {
+
+    try {
+        await corsMiddleware(req);
+        return await handler(req);
+    } catch (error) {
+        console.error('CORS middleware error:', error);
+        return NextResponse.json({ error: 'CORS middleware error' }, { status: 500 });
     }
 }

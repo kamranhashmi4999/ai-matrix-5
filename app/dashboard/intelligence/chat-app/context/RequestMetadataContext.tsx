@@ -1,7 +1,7 @@
 // chat-app/context/RequestMetadataContext.tsx
 'use client';
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { RequestMetadata, RequestMetadataContextProps, RequestMetadataProviderProps } from '../types/chat';
+import { RequestMetadata, RequestMetadataContextProps, RequestMetadataProviderProps } from '@/types/chat';
 
 const defaultRequestMetadata: RequestMetadata = {
     requestId: '',

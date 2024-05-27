@@ -1,13 +1,13 @@
 // chat-app/utils/defaults.ts
-import { ChatRequest } from '../types/chat';
-import { ChatSettings, RequestSettings } from '../types/settings';
+import { ChatRequest } from '@/types/chat';
+import { ChatSettings, RequestSettings } from '@/types/settings';
 
 export const defaultChatSettings: ChatSettings = {
-    aiPreferencesMain: "default",
-    aiPreferencesSecond: "assistant",
-    makeSmallTalk: true,
+    aiPreferencesMain: "direct_chat",
+    aiPreferencesSecond: "one_ai_chat",
+    makeSmallTalk: false,
     quickAnswer: false,
-    improveQuestions: true,
+    improveQuestions: false,
     submitOnEnter: true
 };
 

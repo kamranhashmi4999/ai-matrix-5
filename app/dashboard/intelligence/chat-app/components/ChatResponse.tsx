@@ -6,9 +6,11 @@ import { useAiResponse } from '../context/AiResponseContext';
 import { handleDynamicElements } from '../utils/dynamicSocketHandler';
 
 const ChatResponse: React.FC = () => {
-    const { setRespondData } = useAiResponse();
+    const { triggerResponse, setRespondData } = useAiResponse();
 
     useEffect(() => {
+        if (!triggerResponse) return;
+
         const userToken = 'your-user-token'; // Replace with actual user token
         const message = 'your-message'; // Replace with the actual message to be sent
 
@@ -23,12 +25,11 @@ const ChatResponse: React.FC = () => {
         return () => {
             close();
         };
-    }, [setRespondData]);
+    }, [triggerResponse, setRespondData]); // Depend on triggerResponse
 
     return (
         <div>
-            {/* Render AI responses here */}
-            <p>Listening for AI responses...</p>
+            <p>Listening for AI responses... (ChatResponse)</p>
         </div>
     );
 };

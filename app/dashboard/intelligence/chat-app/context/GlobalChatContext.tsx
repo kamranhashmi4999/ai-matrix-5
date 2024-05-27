@@ -1,7 +1,7 @@
 // chat-app/context/GlobalChatContext.tsx
 'use client';
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { GlobalChatData, GlobalChatContextProps, GlobalChatProviderProps } from '../types/chat';
+import { GlobalChatData, GlobalChatContextProps, GlobalChatProviderProps } from '@/types/chat';
 
 const defaultGlobalChatData: GlobalChatData = {
     eventName: "",

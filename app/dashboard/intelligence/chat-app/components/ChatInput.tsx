@@ -3,7 +3,7 @@
 import React, { useState, useContext } from 'react';
 import { ChatContext } from '../context/ChatContext';
 import { UserContext } from '../context/UserContext';
-import { emitEvent } from '../utils/socket'; // Assume this is correctly imported
+import { emitEvent } from '../utils/socket';
 
 const ChatInput = () => {
     const [input, setInput] = useState('');
@@ -15,19 +15,19 @@ const ChatInput = () => {
     }
 
     const { chatData, updateChatData } = chatContext;
-    const { userData } = userContext;  // Corrected from userInfo to userData
+    const { userData } = userContext;
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => setInput(e.target.value);
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (!input.trim()) return; // Prevent empty submissions
+        if (!input.trim()) return;
 
         const newPromptData = {
             role: 'user',
             message: input,
-            formResponses: [],  // Add this to satisfy the PromptData type
-            customInputs: []    // Add this to satisfy the PromptData type
+            formResponses: [],
+            customInputs: []
         };
 
         const chatRequest = {
@@ -53,7 +53,7 @@ const ChatInput = () => {
     return (
         <form onSubmit={handleSubmit}>
             <input type="text" value={input} onChange={handleInputChange} />
-            <button type="submit">Send</button>
+            <button type="submit">ChatInput Send</button>
         </form>
     );
 };

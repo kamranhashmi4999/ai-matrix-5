@@ -14,7 +14,8 @@ export const loadChatHistory = async (
     try {
         const response = await axios.get(`/api/chat-history?userId=${userId}`, {
             headers: {
-                Authorization: `Bearer ${userContext.userToken}`
+                Authorization: `Bearer ${userContext.userToken}`,
+                'X-Custom-Origin': window.location.origin // Add a custom header for origin
             }
         });
         return response.data;
