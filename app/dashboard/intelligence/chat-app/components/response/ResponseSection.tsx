@@ -1,6 +1,8 @@
+// chat-app/components/response/ResponseSection.tsx
+'use client'
 import { Paper, Text, Space, Container } from '@mantine/core';
 import { ChatMessage } from './ChatMessage';
-import { iMessage } from "../types/types";
+import { iMessage } from "../../types/types";
 
 interface ResponseSectionProps {
     msgHistory: iMessage[];

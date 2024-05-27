@@ -1,11 +1,11 @@
-// app/chat/ChatPage.tsx
+// chat-app/chatpage.tsx
 
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
 import { Container, Grid, Burger, Space, Textarea } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
-import Sidebar from './sidebar/Sidebar';
-import ResponseArea from '@/app/chat/response/ResponseArea';
+import Sidebar from './components/sidebar/Sidebar';
+import ResponseArea from './components/response/ResponseArea';
 
 function ChatPage() {
     const [bottomPadding, setBottomPadding] = useState(0);

@@ -1,10 +1,12 @@
+// chat-app/page.tsx
+
 'use client';
 
 import React from 'react';
 import ChatInput from './components/ChatInput';
 import ChatSettings from './components/settings/ChatSettings';
 import ChatResponse from './components/ChatResponse';
-import ChatHistory from './components/ChatHistory';
+import ChatHistory from './components/sidebar/ChatHistory';
 import AiResponseForm from './components/dynamic-inputs/ChatForm';
 import { useAiResponse } from './context/AiResponseContext';
 import Layout from './layout';
