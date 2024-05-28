@@ -2,30 +2,26 @@
 'use client';
 
 import React from 'react';
-import AmeChatHistoryEntry from './AmeChatHistoryEntry';
-import AmeMenu from './AmeMenu';
-import { Stack } from '@mantine/core';
-import { BsThreeDotsVertical } from "react-icons/bs";
+import AmeChatHistoryEntry from '@/app/dashboard/intelligence/ai-chat/components/sidebar/AmeChatHistoryEntry';
+import { AppShell, CloseButton, Space, Stack, Text } from '@mantine/core';
 
 const ChatSidebarSample = () => {
     return (
-        <Stack
-            h={300}
-            bg="var(--mantine-color-body)"
-            align="stretch"
-            justify="flex-start"
-            gap="xs"
-        >
-            <AmeChatHistoryEntry placeholder='sample item 1' />
-            <AmeChatHistoryEntry placeholder='sample item 2' />
-            <AmeChatHistoryEntry placeholder='sample item 3' />
-            <AmeChatHistoryEntry placeholder='What is the capital of the United States?' />
-            <AmeMenu>
-                <AmeMenu.Target>
-                    <BsThreeDotsVertical size={16} />
-                </AmeMenu.Target>
-            </AmeMenu>
-        </Stack>
+        <AppShell.Aside p="xs">
+            <Text size="xs" >Recent Chats</Text>
+            <Space h={10} />
+            <Stack
+                h={300}
+                bg="var(--mantine-color-body)"
+                align="stretch"
+                justify="flex-start"
+                gap="xs">
+                <AmeChatHistoryEntry initialValue='sample item 1' />
+                <AmeChatHistoryEntry initialValue='sample item 2' />
+                <AmeChatHistoryEntry initialValue='sample item 3' />
+                <AmeChatHistoryEntry initialValue='What is the capital of the United States?' />
+            </Stack>
+        </AppShell.Aside>
     );
 };
 

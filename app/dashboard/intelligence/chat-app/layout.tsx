@@ -10,6 +10,7 @@ import { SettingsProvider } from './context/SettingsContext';
 import { HistoryProvider } from './context/HistoryContext';
 import { AiResponseProvider } from './context/AiResponseContext';
 import { ResponseProvider } from './components/response/ResponseContext'; // Duplicate to address later
+import ChatLayout from './layout';
 
 import ChatPage from './chatpage';
 

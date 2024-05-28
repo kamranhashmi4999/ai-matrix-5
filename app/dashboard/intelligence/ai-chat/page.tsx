@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Textarea, Burger } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import ResponseArea from './components/response/ResponseArea';
+import { ChatLayout } from './chat-layout';
 
 const ChatPage = () => {
     const [bottomPadding, setBottomPadding] = useState(0);
@@ -36,7 +37,7 @@ const ChatPage = () => {
     }, [textareaContainerRef.current]);
 
     return (
-        <>
+        <ChatLayout>
             <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
                 <div style={{ flexGrow: 1, overflow: 'auto' }}>
                     <ResponseArea bottomPadding={bottomPadding} />
@@ -53,7 +54,7 @@ const ChatPage = () => {
                     <Burger opened={opened} onClick={() => setOpened((o) => !o)} />
                 </div>
             )}
-        </>
+        </ChatLayout>
     );
 };
 

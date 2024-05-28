@@ -1,3 +1,5 @@
+// app/samples/chat-sidebar/AmeMenu.tsx
+
 import React, { ReactNode } from 'react';
 import { Menu, rem } from '@mantine/core';
 import { BsPencil, BsCloudDownload } from "react-icons/bs";
