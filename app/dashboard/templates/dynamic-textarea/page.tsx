@@ -95,12 +95,7 @@ const DynamicTextarea = () => {
                 className={styles.textareaStyle}
             />
         </Box>
-            <Space h="xl" />
-            <Textarea
-                size="xs"
-                radius="md"
-                placeholder="Input placeholder"
-                style={{ overflow: 'hidden' }}            />
+
         </div>
     );
 };

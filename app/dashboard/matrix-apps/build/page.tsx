@@ -2,7 +2,6 @@
 
 'use client';
 
-import React from 'react';
 import AppOverview from './steps/AppOverview';
 import AIModelDetails from './steps/AIModelDetails';
 import AIConversation from './steps/AIConversation';
@@ -53,7 +52,6 @@ const BuildPage: React.FC = () => {
 
     const handleFormSubmit = () => {
         console.log('Build configuration completed.');
-        // Handle the final submission logic here
     };
 
     return (
